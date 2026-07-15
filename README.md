@@ -147,3 +147,135 @@ To configure in Jenkins:
 4. Ensure your Jenkins credentials (PAT) are attached.
 
 Jenkins will automatically handle retries (up to 2 times for flaky tests) because the `CI='true'` flag is passed directly to `playwright.config.ts`.
+
+---
+
+## ✨ Why This Framework?
+
+Traditional UI testing solutions often require external services, proprietary tooling, or additional infrastructure to perform visual regression testing.
+
+The M&G UI Automation Framework is built entirely on Playwright, providing a lightweight, deterministic, and fully local solution for validating bespoke web components.
+
+### Benefits
+- 🚀 **Zero third-party dependencies** for visual comparison
+- 📷 **Native Playwright screenshot engine**
+- 🌐 **Cross-browser support** (Chromium, Firefox & WebKit)
+- 📱 **Responsive testing** across Desktop, Tablet and Mobile
+- ⚡ **Parallel execution** for faster feedback
+- 🔍 **Pixel-perfect visual regression**
+- 🔄 **Fully CI/CD compatible**
+- 🧩 **Easily extensible** using reusable helper methods (UICommons)
+- 💻 **Runs identically** on local machines and build agents
+
+---
+
+## 🎯 Why Playwright Visual Testing?
+
+Unlike traditional screenshot comparison tools, this framework relies on Playwright's native visual comparison engine.
+
+### Advantages
+| Capability | This Framework |
+| :--- | :---: |
+| Native browser rendering | ✅ |
+| Pixel-perfect comparison | ✅ |
+| Cross-browser testing | ✅ |
+| Parallel execution | ✅ |
+| No external cloud dependency | ✅ |
+| Works offline | ✅ |
+| No additional licensing | ✅ |
+| Full control over tolerances | ✅ |
+| Easily debuggable | ✅ |
+
+---
+
+## 📊 Framework Comparison
+
+| Feature | This Framework | AET | Applitools |
+| :--- | :---: | :---: | :---: |
+| Built on Playwright | ✅ | ❌ | Partial |
+| Native browser screenshots | ✅ | ❌ | ❌ |
+| Pixel-perfect comparison | ✅ | ⚠️ | ❌ (AI-based) |
+| Cross-browser support | ✅ | Limited | ✅ |
+| Parallel execution | ✅ | Limited | ✅ |
+| Runs locally | ✅ | ⚠️ | ⚠️ |
+| No external cloud | ✅ | ✅ | ❌ |
+| Open-source stack | ✅ | ⚠️ | ❌ |
+| CI/CD ready | ✅ | ✅ | ✅ |
+| Visual helper library | ✅ | ❌ | ❌ |
+| Lazy-loading handling | ✅ | ❌ | ❌ |
+| Sticky element stabilisation | ✅ | ❌ | ❌ |
+| Custom component preparation | ✅ | ❌ | ❌ |
+| **Cost** | **Free** | **Free** | **Commercial** |
+
+---
+
+## 🛠️ Advanced Stability Features
+
+Visual testing becomes unreliable when pages contain dynamic content such as:
+- Lazy-loaded videos
+- Flourish stories
+- Carousels
+- Sticky components
+- Animations
+- Asynchronously loaded images
+
+The framework provides a growing library of reusable helpers to eliminate test flakiness. Examples include:
+- `ensurePageReadyForTesting()`
+- `waitForStableHeight()`
+- `preparePageForFullPageScreenshot()`
+- `freezeStickyElement()`
+- `stubFlourishStories()`
+- `forceElementVisible()`
+- `loadLazyIframes()`
+
+These utilities make screenshots deterministic across supported browsers and responsive viewports.
+
+---
+
+## 📈 Framework Statistics
+
+Current implementation includes:
+
+| Metric | Value |
+| :--- | :--- |
+| **Components Covered** | 55+ |
+| **Visual Test Cases** | 275+ |
+| **Supported Browsers** | 3 (Chromium, WebKit, Firefox) |
+| **Supported Viewports** | 3 (Desktop, Tablet, Mobile) |
+| **Baseline Images** | 800+ |
+| **Parallel Workers** | Configurable |
+| **Jenkins Ready** | ✅ |
+
+---
+
+## 🧩 Framework Design
+
+```mermaid
+flowchart TD
+    A[Developer] --> B[Playwright Test Runner]
+    B --> C[WebCommons]
+    C --> D[UICommons]
+    D --> E[Page Stabilisation]
+    E --> F[Screenshot Capture]
+    F --> G[Baseline Comparison]
+    G -- Match --> H[PASS]
+    G -- Difference --> I[FAIL]
+```
+
+---
+
+## 🔍 Why Not AI-Based Visual Testing?
+
+This framework intentionally performs **pixel-level visual comparison** rather than AI-assisted comparison.
+
+For UI component validation, every single pixel matters. Examples of defects detected include:
+- Incorrect spacing
+- Missing images
+- Font regressions
+- Alignment issues
+- Colour changes
+- Unexpected CSS changes
+- Layout shifts
+- Missing components
+
+Because comparisons are deterministic, failures are reproducible across local execution and CI pipelines.

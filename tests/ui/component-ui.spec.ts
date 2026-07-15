@@ -74,38 +74,92 @@ test.describe('Component UI Validation', () => {
     });
 
 
-
-
-    test('Flourish UI Testing', { tag: '@Flourish' }, async ({ page }) => {
+    test('Flourish Visualisation UI Testing', { tag: '@Flourish' }, async ({ page }) => {
         test.setTimeout(180000);
 
         const webCommons = new WebCommons(page);
 
-        // Replace only Flourish Story embeds with a static stub
-        await UICommons.stubFlourishStories(page);
+        // Launch the application
+        await webCommons.launchApplication(
+            '/adviser/bespoke-components/ui/flourish-visualisation'
+        );
+
+        // Ensure the page is fully loaded and ready
+        await UICommons.ensurePageReadyForTesting(page);
+
+        // Wait for the page layout to stabilise
+        await UICommons.waitForStableHeight(page);
+
+        await webCommons.waitForSeconds(2);
+
+        // Full-page visual comparison
+        await UICommons.assertFullPage(
+            page,
+            ['Flourish Visualisation', 'flourish-visualisation-page-expected.png']
+        );
+    });
+
+    // 
+
+    test('Flourish Story UI Testing', { tag: '@Flourish' }, async ({ page }) => {
+        test.setTimeout(180000);
+
+        const webCommons = new WebCommons(page);
 
         // Launch the application
         await webCommons.launchApplication(
-            '/adviser/bespoke-components/ui/flourish-usecase'
+            '/adviser/bespoke-components/ui/flourish-story'
         );
 
-        await webCommons.waitForPageLoad();
+        // Ensure the page is fully loaded and ready
         await UICommons.ensurePageReadyForTesting(page);
 
+        // Wait for the page layout to stabilise
         await UICommons.waitForStableHeight(page);
 
-        // Replace story embeds
+        // Replace Flourish Story embeds with a deterministic placeholder
         await UICommons.stubFlourishStories(page);
 
+        // Wait for the DOM to stabilise after replacing the component
         await UICommons.waitForStableHeight(page);
 
-        await webCommons.waitForSeconds(1);
+        await webCommons.waitForSeconds(2);
 
+        // Full-page visual comparison
         await UICommons.assertFullPage(
             page,
-            ['Flourish', 'flourish-page-expected.png']
+            ['Flourish Story', 'flourish-story-page-expected.png']
         );
     });
+
+
+    test('Flourish Scrolly UI Testing', { tag: '@Flourish' }, async ({ page }) => {
+        test.setTimeout(180000);
+
+        const webCommons = new WebCommons(page);
+
+        // Launch the application
+        await webCommons.launchApplication(
+            '/adviser/bespoke-components/ui/flourish-story'
+        );
+
+        // Ensure the page is fully loaded and ready
+        await UICommons.ensurePageReadyForTesting(page);
+
+        // Wait for the page layout to stabilise
+        await UICommons.waitForStableHeight(page);
+
+        await webCommons.waitForSeconds(2);
+
+        // Full-page visual comparison
+        await UICommons.assertFullPage(
+            page,
+            ['Flourish Scrolly', 'flourish-scrolly-page-expected.png']
+        );
+    });
+
+
+
 
 
     test('Inpage Search UI Testing', { tag: '@InpageSearch' }, async ({ page }) => {
@@ -606,7 +660,7 @@ test.describe('Component UI Validation', () => {
         await UICommons.ensurePageReadyForTesting(page);
 
         await UICommons.waitForStableHeight(page);
-        await webCommons.waitForSeconds(3);
+        await webCommons.waitForSeconds(5);
 
         await UICommons.assertFullPage(page, ['Promo Panel Component', 'promo-panel-component-page-expected.png']);
     });

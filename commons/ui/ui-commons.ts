@@ -100,57 +100,64 @@ export class UICommons {
 
 
     /**
-* Replaces all Flourish Story components with a deterministic placeholder.
-*
-* Unlike network stubbing, this works consistently across Chromium,
-* Firefox and WebKit because it modifies the DOM after the page has loaded.
-*
-* Only Story components (.fl-scrolly-wrapper) are replaced.
-* Standard Flourish charts remain untouched.
-*/
+ * Replaces Flourish Story (Scrolly) embeds with a static placeholder.
+ *
+ * This prevents:
+ * - Dynamic iframe rendering
+ * - Sticky behaviour
+ * - Scroll animations
+ * - Browser-specific layout differences
+ */
     public static async stubFlourishStories(page: Page): Promise<void> {
 
         await page.evaluate(() => {
 
-            document
-                .querySelectorAll('.fl-scrolly-wrapper')
-                .forEach((wrapper: any) => {
+            document.querySelectorAll(".fl-scrolly-wrapper").forEach((wrapper: any) => {
 
-                    const height = wrapper.getBoundingClientRect().height || 600;
+                wrapper.innerHTML = `
+                <div style="
+                    width:100%;
+                    height:800px;
+                    background:#d946ef;
+                    color:white;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:32px;
+                    font-weight:bold;
+                    border-radius:8px;
+                ">
+                    Flourish Story (Stub)
+                </div>
+            `;
 
-                    wrapper.innerHTML = `
-                    <div
-                        style="
-                            width:100%;
-                            height:${height}px;
-                            min-height:${height}px;
-                            display:flex;
-                            align-items:center;
-                            justify-content:center;
-                            background:#FF00FF;
-                            color:#000;
-                            font-family:Arial,sans-serif;
-                            font-size:20px;
-                            font-weight:bold;
-                            border:2px solid #FF00FF;
-                            box-sizing:border-box;
-                        "
-                    >
-                        Flourish Story (Stub)
-                    </div>
-                `;
+                // Reset wrapper completely
+                wrapper.style.height = "auto";
+                wrapper.style.minHeight = "0";
+                wrapper.style.maxHeight = "none";
+                wrapper.style.padding = "0";
+                wrapper.style.margin = "0";
+                wrapper.style.overflow = "hidden";
+                wrapper.style.position = "relative";
+                wrapper.style.transform = "none";
+            });
 
-                    wrapper.style.height = `${height}px`;
-                    wrapper.style.minHeight = `${height}px`;
-                    wrapper.style.maxHeight = `${height}px`;
-                    wrapper.style.overflow = 'hidden';
-                });
+            // Collapse any parent containers that may still retain the
+            // original scrolly height.
+            document.querySelectorAll(".flourishcomponent").forEach((el: any) => {
+
+                el.style.height = "auto";
+                el.style.minHeight = "0";
+                el.style.maxHeight = "none";
+                el.style.padding = "0";
+                el.style.margin = "0";
+                el.style.overflow = "hidden";
+            });
 
         });
 
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(1000);
     }
-
 
 
     public static async waitForStableHeight(page: Page) {

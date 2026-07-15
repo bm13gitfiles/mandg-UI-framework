@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'mcr.microsoft.com/playwright:v1.55.0-noble'
-            args '--ipc=host'
-        }
-    }
+    agent any
 
     environment {
         // You can change 'stage' to 'dev' or 'prod' when running the pipeline manually

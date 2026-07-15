@@ -1,12 +1,6 @@
 <div align="center">
   <img src="assets/banner.png" alt="M&G UI Automation Framework Banner" width="100%">
   
-  <br><br>
-  <img src="https://img.shields.io/badge/-Playwright-45ba4b?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright" />
-  <img src="https://img.shields.io/badge/-Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white" alt="Jenkins" />
-  <img src="https://img.shields.io/badge/-Azure_DevOps-0078D7?style=for-the-badge&logo=azure-devops&logoColor=white" alt="Azure DevOps" />
-  <img src="https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-  <br><br>
 
   <h1>M&G UI Automation Framework</h1>
   <p><i>A high-performance, visually-driven testing framework powered by Playwright</i></p>

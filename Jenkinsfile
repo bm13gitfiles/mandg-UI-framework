@@ -17,14 +17,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                bat 'npm ci'
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
                 // This uses the shortcut script we added earlier!
-                sh 'npm run test'
+                bat 'npm run test'
             }
         }
     }

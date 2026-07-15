@@ -1,0 +1,19 @@
+{
+
+    "mandg_site" : {
+        "url" : "https://www.mandg.com/financial-advice/get-financial-advice",
+        "title" : "Speak to a Financial Planner | Financial Planning With M&G"
+    },
+
+    "api" : {
+        "base_url" : "https://api.github.com",
+        "token" : "Bearer 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",
+        "owner" : "David-Fincher",
+        "name" : "APITester7"
+
+    }
+
+
+
+
+}

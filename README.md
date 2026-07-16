@@ -45,7 +45,7 @@
 
 This repository contains the official UI automation framework used for validating and performing **visual regression testing** on M&G's bespoke web components.
 
-The framework is designed to capture, compare, and validate pixel-perfect screenshots of **55+ UI components** across multiple viewports (Desktop, Tablet, Mobile) and browsers (Chromium, WebKit).
+The framework is designed to capture, compare, and validate pixel-perfect screenshots of **55+ UI components** across **5 distinct viewports** (Large Desktop, 960px Desktop, Mac Safari Desktop, Tablet, Mobile) and browsers (Chromium, WebKit).
 
 ### Key Capabilities
 
@@ -343,7 +343,7 @@ These utilities make screenshots deterministic across supported browsers and res
 | **Components Covered** | 55+ |
 | **Visual Test Cases** | 275+ |
 | **Supported Browsers** | 3 (Chromium, WebKit, Firefox) |
-| **Supported Viewports** | 3 (Desktop, Tablet, Mobile) |
+| **Supported Viewports** | 5 (Large Desktop, 960px Desktop, Safari Desktop, Tablet, Mobile) |
 | **Baseline Images** | 800+ |
 | **Parallel Workers** | Configurable |
 | **Jenkins Ready** | ✅ |

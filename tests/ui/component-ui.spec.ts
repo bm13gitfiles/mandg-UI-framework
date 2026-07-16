@@ -209,7 +209,7 @@ test.describe('Component UI Validation', () => {
         const mandgSteps = new MandgPageSteps(page);
 
         // This test uses the Prod URL directly
-        await webCommons.launchApplication('https://www.mandg.com/adviser/search-results?q=Paraplanners+Assembly+2023%3A+Do+tax+wrappers+go+to+heaven%3F&origin=header&suggestion=true');
+        await webCommons.launchApplication('https://www-stage.mandg.com/adviser/search-results?q=Paraplanners+Assembly+2023%3A+Do+tax+wrappers+go+to+heaven%3F&origin=header&suggestion=true');
         await UICommons.ensurePageReadyForTesting(page);
 
         await mandgSteps.acceptOneTrustCookieBanner();
@@ -281,7 +281,7 @@ test.describe('Component UI Validation', () => {
         const mandgSteps = new MandgPageSteps(page);
 
         // This test uses the www-stage URL
-        await webCommons.launchApplication('https://www.mandg.com/adviser/services/document-centre');
+        await webCommons.launchApplication('https://www-stage.mandg.com/adviser/services/document-centre');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
 

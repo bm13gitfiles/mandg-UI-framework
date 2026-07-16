@@ -10,6 +10,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^12.8.3",
     "@playwright/test": "^1.59.1",
+    "cross-env": "^10.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   },
@@ -23,7 +24,10 @@
     "test--1920safari": "npx playwright test --project=mac-safari",
     "test--960": "npx playwright test --project=chrome-desktop-960px-view",
     "test--mobile": "npx playwright test --project=mobile",
-    "test--tab": "npx playwright test --project=tablet"
+    "test--tab": "npx playwright test --project=tablet",
+    "test--stage": "cross-env TEST_ENV=stage npx playwright test",
+    "test--devx": "cross-env TEST_ENV=devx npx playwright test",
+    "test--prod": "cross-env TEST_ENV=prod npx playwright test"
   },
   "type": "module"
 }

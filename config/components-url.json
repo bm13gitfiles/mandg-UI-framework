@@ -1,218 +1,220 @@
 [
     {
         "componentName": "Carousel",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/carousel"
+        "path": "/adviser/bespoke-components/carousel"
     },
     {
         "componentName": "Search",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/search"
+        "path": "/adviser/bespoke-components/search"
     },
     {
         "componentName": "Kids Library",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/kids-library"
+        "path": "/adviser/bespoke-components/kids-library"
     },
     {
         "componentName": "Detailed Egr Table",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/Detailed-EGR"
+        "path": "/adviser/bespoke-components/Detailed-EGR"
     },
     {
         "componentName": "Inpage Search",
-        "url": "https://www.mandg.com/adviser/search-results?q=Paraplanners+Assembly+2023%3A+Do+tax+wrappers+go+to+heaven%3F&origin=header&suggestion=true"
+        "path": "/adviser/search-results?q=Paraplanners+Assembly+2023%3A+Do+tax+wrappers+go+to+heaven%3F&origin=header&suggestion=true",
+        "isMainSite": true
     },
     {
         "componentName": "Back To Top",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/back-to-top"
+        "path": "/adviser/bespoke-components/ui/back-to-top"
     },
     {
         "componentName": "EGR Widget Component",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/egr-widget-component"
+        "path": "/adviser/core-components/egr-widget-component"
     },
     {
         "componentName": "Document Centre",
-        "url": "https://www.mandg.com/adviser/services/document-centre"
+        "path": "/adviser/services/document-centre",
+        "isMainSite": true
     },
     {
         "componentName": "Video",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/video"
+        "path": "/adviser/bespoke-components/video"
     },
     {
         "componentName": "Hero Banner Article",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/hero-banner-article-final"
+        "path": "/adviser/core-components/hero-banner-article-final"
     },
     {
         "componentName": "Button",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/button"
+        "path": "/adviser/core-components/button"
     },
     {
         "componentName": "Bullet List",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/bullet-list1"
+        "path": "/adviser/core-components/bullet-list1"
     },
     {
         "componentName": "Separator Component",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/separator-component"
+        "path": "/adviser/core-components/separator-component"
     },
     {
         "componentName": "Tab Component Dark Theme",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/tab-component-dark-theme"
+        "path": "/adviser/bespoke-components/ui/tab-component-dark-theme"
     },
     {
         "componentName": "Hero Banner With Active Square",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/hero-banner-with-active-square0"
+        "path": "/adviser/core-components/hero-banner-with-active-square0"
     },
     {
         "componentName": "Teaser Banner Article With Image",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/teaser-banner-article-with-image"
+        "path": "/adviser/bespoke-components/ui/teaser-banner-article-with-image"
     },
     {
         "componentName": "Hero Teaser Banner 50 50",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/hero-teaser-banner-50-50"
+        "path": "/adviser/bespoke-components/ui/hero-teaser-banner-50-50"
     },
     {
         "componentName": "Teaser Banner 60 40",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/teaser-banner-60-401"
+        "path": "/adviser/core-components/teaser-banner-60-401"
     },
     {
         "componentName": "Text",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/Text"
+        "path": "/adviser/core-components/Text"
     },
     {
         "componentName": "Title Component",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/title-component"
+        "path": "/adviser/core-components/title-component"
     },
     {
         "componentName": "Footer",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/footer"
+        "path": "/adviser/bespoke-components/footer"
     },
     {
         "componentName": "List",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/list"
+        "path": "/adviser/bespoke-components/ui/list"
     },
     {
         "componentName": "Download Button",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/download-button"
+        "path": "/adviser/core-components/download-button"
     },
     {
         "componentName": "Print Button",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/print-button"
+        "path": "/adviser/core-components/print-button"
     },
     {
         "componentName": "Hero Banner Routing Links",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/hero-banner-routing-links"
+        "path": "/adviser/core-components/hero-banner-routing-links"
     },
     {
         "componentName": "Teaser With Image And Text",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/teaser-with-image-and-text"
+        "path": "/adviser/core-components/teaser-with-image-and-text"
     },
     {
         "componentName": "Teaser Cards With CTA",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/teaser-cards-with-cta"
+        "path": "/adviser/core-components/teaser-cards-with-cta"
     },
     {
         "componentName": "Teaser Testimonial",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/teaser-testimonial"
+        "path": "/adviser/core-components/teaser-testimonial"
     },
     {
         "componentName": "Teaser Tile With Number",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/teaser-tile-with-number"
+        "path": "/adviser/core-components/teaser-tile-with-number"
     },
     {
         "componentName": "Teaser USP",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/teaser-usp"
+        "path": "/adviser/core-components/teaser-usp"
     },
     {
         "componentName": "Sticky Jumping Links",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/sticky-jumping-links"
+        "path": "/adviser/core-components/sticky-jumping-links"
     },
     {
         "componentName": "Table",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/table-component"
+        "path": "/adviser/core-components/table-component"
     },
     {
         "componentName": "Right Hand Sticky Variant1",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/right-hand-sticky-varient1"
+        "path": "/adviser/core-components/right-hand-sticky-varient1"
     },
     {
         "componentName": "Container Component",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/Container"
+        "path": "/adviser/bespoke-components/ui/Container"
     },
     {
         "componentName": "Right Hand Sticky Variant2",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/right-hand-sticky-varient2"
+        "path": "/adviser/core-components/right-hand-sticky-varient2"
     },
     {
         "componentName": "Right Hand Sticky Variant3",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/right-hand-sticky-varient3"
+        "path": "/adviser/core-components/right-hand-sticky-varient3"
     },
     {
         "componentName": "Social Share",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/social-share"
+        "path": "/adviser/bespoke-components/social-share"
     },
     {
         "componentName": "Quick Links",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/quick-links"
+        "path": "/adviser/core-components/quick-links"
     },
     {
         "componentName": "Equal Height Container",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/equal-height-container1"
+        "path": "/adviser/bespoke-components/equal-height-container1"
     },
     {
         "componentName": "Promo Panel Component",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/promo-panel-component"
+        "path": "/adviser/bespoke-components/ui/promo-panel-component"
     },
     {
         "componentName": "Listing Component Related Links Static",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/Listing-Component-Related-links-Static"
+        "path": "/adviser/bespoke-components/Listing-Component-Related-links-Static"
     },
     {
         "componentName": "Drawer Links",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/drawer-links1"
+        "path": "/adviser/bespoke-components/drawer-links1"
     },
     {
         "componentName": "Call Us Policy Number",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/call-us-policy-number"
+        "path": "/adviser/bespoke-components/call-us-policy-number"
     },
     {
         "componentName": "Online Services",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/online-service.illustration.uat1"
+        "path": "/adviser/bespoke-components/online-service.illustration.uat1"
     },
     {
         "componentName": "Reduce Footer",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/reduce-footer"
+        "path": "/adviser/core-components/reduce-footer"
     },
     {
         "componentName": "One Trust Cookie Embed",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/one-trust-cookie-embed"
+        "path": "/adviser/bespoke-components/one-trust-cookie-embed"
     },
     {
         "componentName": "Table Of Content",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/table-of-content"
+        "path": "/adviser/bespoke-components/table-of-content"
     },
     {
         "componentName": "Accordion",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/Accordion"
+        "path": "/adviser/bespoke-components/ui/Accordion"
     },
     {
         "componentName": "Alert",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/Alert-1"
+        "path": "/adviser/bespoke-components/ui/Alert-1"
     },
     {
         "componentName": "Breadcrumb",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/breadcrumb"
+        "path": "/adviser/core-components/breadcrumb"
     },
     {
         "componentName": "Container",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/Container"
+        "path": "/adviser/bespoke-components/ui/Container"
     },
     {
         "componentName": "Image",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/image"
+        "path": "/adviser/core-components/image"
     },
     {
         "componentName": "Tab Component Light Theme",
-        "url": "https://showcase-www-stage.mandg.com/adviser/bespoke-components/ui/tab-component-light-theam"
+        "path": "/adviser/bespoke-components/ui/tab-component-light-theam"
     },
     {
         "componentName": "Title",
-        "url": "https://showcase-www-stage.mandg.com/adviser/core-components/title"
+        "path": "/adviser/core-components/title"
     }
 ]

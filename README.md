@@ -150,6 +150,9 @@ We have exposed several simple NPM commands to make running your tests incredibl
 | `npm run test--960` | Runs tests exclusively on the Standard Desktop (960px) responsive viewport. |
 | `npm run test--mobile` | Runs tests exclusively on the Mobile (375x667) viewport. |
 | `npm run test--tab` | Runs tests exclusively on the Tablet (768x1028) viewport. |
+| `npm run test--stage` | Executes the entire test suite against the **STAGE** environment. |
+| `npm run test--devx` | Executes the entire test suite against the **DEVX** environment. |
+| `npm run test--prod` | Executes the entire test suite against the **PROD** environment. |
 
 ---
 

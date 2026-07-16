@@ -80,13 +80,41 @@ export class WebCommons {
 
 
 
-    //Common method to launch the URL
-    async launchApplication(url: string, title?: string): Promise<void> {
-        await this.page.goto(url);
+    //Common method to launch the URL dynamically based on environment
+    async launchApplication(urlOrPath: string, isMainSite: boolean = false, title?: string): Promise<void> {
+        const env = process.env.TEST_ENV || 'stage';
+        let path = urlOrPath;
+
+        // If an absolute URL is passed, extract the path and auto-detect the site type
+        if (urlOrPath.startsWith('http')) {
+            const urlObj = new URL(urlOrPath);
+            path = urlObj.pathname + urlObj.search + urlObj.hash;
+            
+            if (urlObj.hostname === 'www.mandg.com' || urlObj.hostname === 'www-stage.mandg.com' || urlObj.hostname === 'www-devx.mandg.com') {
+                isMainSite = true;
+            } else {
+                isMainSite = false;
+            }
+        }
+
+        let host = '';
+
+        if (isMainSite) {
+            if (env === 'prod') host = 'https://www.mandg.com';
+            else if (env === 'dev' || env === 'devx') host = 'https://www-devx.mandg.com';
+            else host = 'https://www-stage.mandg.com';
+        } else {
+            if (env === 'prod') host = 'https://showcase-www.mandg.com';
+            else if (env === 'dev' || env === 'devx') host = 'https://showcase-www-devx.mandg.com';
+            else host = 'https://showcase-www-stage.mandg.com';
+        }
+
+        const fullUrl = `${host}${path.startsWith('/') ? path : '/' + path}`;
+        await this.page.goto(fullUrl);
+        
         if (title) {
             await expect(this.page).toHaveTitle(title);
         }
-
     }
 
     //Common method to scroll to the element

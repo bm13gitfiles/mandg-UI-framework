@@ -8,15 +8,7 @@ import { defineConfig, devices } from '@playwright/test';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-const TEST_ENV = process.env.TEST_ENV || 'stage';
 
-const baseURLs = {
-  dev: 'https://showcase-www-devx.mandg.com',
-  stage: 'https://showcase-www-stage.mandg.com',
-  prod: 'https://www.mandg.com'
-};
-
-const activeBaseURL = baseURLs[TEST_ENV as keyof typeof baseURLs] || baseURLs.stage;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -41,8 +33,7 @@ export default defineConfig({
   reporter: [['html', { outputFolder: 'reports' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like await page.goto('') */
-    baseURL: activeBaseURL,
+
     storageState: 'storageState.json',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

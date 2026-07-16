@@ -8,8 +8,12 @@ async function globalSetup(config: FullConfig) {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   
-  // Extract baseURL from the first project in Playwright config
-  const baseURL = config.projects[0].use.baseURL || 'https://showcase-www-stage.mandg.com';
+  const env = process.env.TEST_ENV || 'stage';
+  let baseURL = '';
+  
+  if (env === 'prod') baseURL = 'https://showcase-www.mandg.com';
+  else if (env === 'dev' || env === 'devx') baseURL = 'https://showcase-www-devx.mandg.com';
+  else baseURL = 'https://showcase-www-stage.mandg.com';
 
   // Navigate to the base application
   await page.goto(`${baseURL}/adviser`);

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { WebCommons } from '../../commons/ui/web-commons.ts';
 import PageElements from '../page-elements/mandg-page-elements.json' with { type: 'json' };
 
@@ -9,6 +9,20 @@ export class MandgPageSteps {
     constructor(page: Page) {
         this.page = page;
         this.webCommons = new WebCommons(page);
+    }
+
+
+    async verifyWhetherTheOneTrustCookieBannerIsDisplayed(): Promise<void> {
+        const locator = this.page.locator(PageElements['accept-cookies-button']);
+
+        await expect(
+            locator,
+            'OneTrust Cookie Banner is not displayed.'
+        ).toBeVisible({
+            timeout: 5000
+        });
+
+        console.log('✅ OneTrust Cookie Banner is displayed.');
     }
 
     async submitLeadGenForm() {

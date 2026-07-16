@@ -4,6 +4,29 @@ import { WebCommons } from '../../commons/ui/web-commons.ts';
 import PageElement from "../../page-objects/page-elements/mandg-page-elements.json" with { type: "json" };
 import { MandgPageSteps } from '../../page-objects/page-steps/mandg-page-steps.ts';
 
+test.describe('One Trust Cookie Banner UI Validation', () => {
+    // This overrides the global storageState.json for this specific test block.
+    // By passing empty arrays, Playwright starts a fresh session without the accepted cookies.
+    test.use({ storageState: { cookies: [], origins: [] } });
+
+    test('OneTrust Cookie Banner Testing', { tag: '@CookieBanner' }, async ({ page }) => {
+        const webCommons = new WebCommons(page);
+
+        // Launch the application (homepage) to trigger the banner
+        await webCommons.launchApplication('/adviser/bespoke-components/ui/One-Trust-Cookie-Banner-Adviser');
+        await webCommons.waitForPageLoad();
+
+        const mandgPageSteps = new MandgPageSteps(page);
+        await mandgPageSteps.verifyWhetherTheOneTrustCookieBannerIsDisplayed();
+
+        // Wait for the banner animation to fully slide up/render
+        await webCommons.waitForSeconds(3);
+
+        // Assert the page with the banner visible
+        await UICommons.assertPartialPage(page, ['CookieBanner', 'cookie-banner-expected.png']);
+    });
+});
+
 test.describe('Component UI Validation', () => {
     test.describe.configure({ mode: 'parallel' });
 

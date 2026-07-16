@@ -12,7 +12,7 @@ This repository contains the official UI automation framework used for validatin
 
 ## 🌟 Framework Overview
 
-The framework is designed to capture, compare, and validate pixel-perfect screenshots of **55+ bespoke UI components** across **5 responsive viewport profiles** and multiple browser engines (Chromium, Firefox and WebKit).
+The framework is designed to capture, compare, and validate pixel-perfect screenshots of **56+ bespoke UI components** across **5 responsive viewport profiles** and multiple browser engines (Chromium, Firefox and WebKit).
 
 Every component is automatically validated across:
 
@@ -140,7 +140,7 @@ We have exposed several simple NPM commands to make running your tests incredibl
 
 | Command | Action |
 | :--- | :--- |
-| `npm run test` | Runs the entire suite of 275+ visual regression tests in headless mode. |
+| `npm run test` | Runs the entire suite of 276+ visual regression tests in headless mode. |
 | `npm run test:ui` | Opens the **Playwright UI**, allowing you to visually debug failures and replay every test step. |
 | `npm run test:update` | Updates the baseline screenshots. Run this only after an approved UI change. |
 | `npm run test:tag -- "@Carousel"` | Executes only the tagged component. |

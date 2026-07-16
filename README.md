@@ -146,7 +146,10 @@ We have exposed several simple NPM commands to make running your tests incredibl
 | `npm run test--tags -- "@Carousel"` | Executes only the tagged component. |
 | `npm run test--report` | Opens the Playwright HTML Report after execution. |
 | `npm run test--1920chrome` | Runs tests exclusively on the Large Desktop (1920x1080) Chromium viewport. |
+| `npm run test--1920safari` | Runs tests exclusively on the Mac Safari Desktop viewport. |
+| `npm run test--960` | Runs tests exclusively on the Standard Desktop (960px) responsive viewport. |
 | `npm run test--mobile` | Runs tests exclusively on the Mobile (375x667) viewport. |
+| `npm run test--tab` | Runs tests exclusively on the Tablet (768x1028) viewport. |
 
 ---
 

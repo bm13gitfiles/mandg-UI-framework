@@ -567,7 +567,7 @@ test.describe('Component UI Validation', () => {
     test('Teaser USP UI Testing', { tag: '@TeaserUSP' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication('/adviser/core-components/teaser-usp');
+        await webCommons.launchApplication('adviser/bespoke-components/ui/teaser-USP');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
 
@@ -845,7 +845,7 @@ test.describe('Component UI Validation', () => {
 
     test('Image UI Testing', { tag: '@Image' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
-        await webCommons.launchApplication('/adviser/core-components/image');
+        await webCommons.launchApplication('/adviser/bespoke-components/ui/image');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.waitForStableHeight(page);

@@ -141,10 +141,12 @@ We have exposed several simple NPM commands to make running your tests incredibl
 | Command | Action |
 | :--- | :--- |
 | `npm run test` | Runs the entire suite of 295+ visual regression tests in headless mode. |
-| `npm run test:ui` | Opens the **Playwright UI**, allowing you to visually debug failures and replay every test step. |
-| `npm run test:update` | Updates the baseline screenshots. Run this only after an approved UI change. |
-| `npm run test:tag -- "@Carousel"` | Executes only the tagged component. |
-| `npm run report` | Opens the Playwright HTML Report after execution. |
+| `npm run test--ui` | Opens the **Playwright UI**, allowing you to visually debug failures and replay every test step. |
+| `npm run ss--update` | Updates the baseline screenshots. Run this only after an approved UI change. |
+| `npm run test--tags -- "@Carousel"` | Executes only the tagged component. |
+| `npm run test--report` | Opens the Playwright HTML Report after execution. |
+| `npm run test--1920chrome` | Runs tests exclusively on the Large Desktop (1920x1080) Chromium viewport. |
+| `npm run test--mobile` | Runs tests exclusively on the Mobile (375x667) viewport. |
 
 ---
 

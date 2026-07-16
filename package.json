@@ -14,11 +14,16 @@
     "typescript": "^6.0.3"
   },
   "scripts": {
-    "test": "playwright test",
-    "test:ui": "playwright test --ui",
-    "test:update": "playwright test --update-snapshots",
-    "test:tag": "playwright test --grep",
-    "report": "playwright show-report"
+    "test": "npx playwright test",
+    "test--ui": "npx playwright test --ui",
+    "ss--update": "npx playwright test --update-snapshots",
+    "test--tags": "npx playwright test --grep",
+    "test--report": "npx playwright show-report reports",
+    "test--1920chrome": "npx playwright test --project=chrome-desktop",
+    "test--1920safari": "npx playwright test --project=mac-safari",
+    "test--960": "npx playwright test --project=chrome-desktop-960px-view",
+    "test--mobile": "npx playwright test --project=mobile",
+    "test--tab": "npx playwright test --project=tablet"
   },
   "type": "module"
 }

@@ -86,5 +86,6 @@
     "egr-fund-dropdown": "button:has-text('Select Fund')",
     "egr-view-egr-button": "a:has-text('View EGR')",
     "egr-product-retirement-plan": "//li[@role='option' and @data-key='Flexible Retirement Plan']",
-    "egr-fund-cautious-pension": "//li[@role='option' and @data-key='PruFund Cautious Pension Fund/PruFund Protected Cautious Pension Fund']"
+    "egr-fund-cautious-pension": "//li[@role='option' and @data-key='PruFund Cautious Pension Fund/PruFund Protected Cautious Pension Fund']",
+    "lead-gen-form-submit-button": "//button[@type='SUBMIT']"
 }

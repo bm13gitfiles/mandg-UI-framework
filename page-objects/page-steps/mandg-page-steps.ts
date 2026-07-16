@@ -11,6 +11,15 @@ export class MandgPageSteps {
         this.webCommons = new WebCommons(page);
     }
 
+    async submitLeadGenForm() {
+        try {
+            const locator = PageElements['lead-gen-form-submit-button'];
+            await this.webCommons.clickElement(locator);
+        } catch (error) {
+            console.log('Lead gen form submission failed.');
+        }
+    }
+
     async acceptOneTrustCookieBanner() {
         try {
             const locator = PageElements['accept-cookies-button'];

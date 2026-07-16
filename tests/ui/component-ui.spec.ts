@@ -9,6 +9,25 @@ test.describe('Component UI Validation', () => {
 
     // --- Complex / Bespoke Components ---
 
+    test('LeadGen Form UI Testing', { tag: '@LeadGenForm' }, async ({ page }) => {
+        const webCommons = new WebCommons(page);
+
+        await webCommons.launchApplication('/adviser/bespoke-components/ui/Leadgen-form-base');
+        await webCommons.waitForPageLoad();
+
+        await UICommons.ensurePageReadyForTesting(page);
+
+        const mandgPageSteps = new MandgPageSteps(page);
+        await mandgPageSteps.submitLeadGenForm();
+
+        await UICommons.waitForStableHeight(page);
+        await webCommons.waitForSeconds(2);
+
+        // This component requires specific waits or custom logic (add here)
+
+        await UICommons.assertFullPage(page, ['LeadGen Form', 'lead-gen-form-page-expected.png']);
+    })
+
     test('Carousel UI Testing', { tag: '@Carousel' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 

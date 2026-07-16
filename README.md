@@ -258,3 +258,20 @@ To configure in Jenkins:
 4. Attach the required Jenkins credentials (PAT).
 
 Jenkins automatically performs retries for flaky tests (up to two attempts) because the `CI='true'` flag is passed directly into `playwright.config.ts`.
+
+---
+
+## ☁️ Azure DevOps Integration
+
+This repository is fully integrated with Azure DevOps pipelines via the `azure-pipelines.yml` file.
+
+### Triggering a Run in Azure DevOps
+1. Navigate to your Azure DevOps project pipelines.
+2. Click **Run Pipeline**.
+3. Under the **Parameters** dropdown, select your target **Test Environment** (`devx`, `stage`, or `prod`).
+4. Click **Run**.
+
+### Pipeline Artifacts
+The pipeline automatically publishes the following artifacts when the run completes:
+- **`playwright-html-report`**: The full HTML suite report. Download and open `index.html` to view it.
+- **`failure-screenshots`**: Captures of visual mismatches or page errors (only generated if a test fails).

@@ -1,0 +1,49 @@
+trigger:
+  - main
+
+parameters:
+  - name: testEnvironment
+    displayName: Test Environment
+    type: string
+    default: stage
+    values:
+      - devx
+      - stage
+      - prod
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm ci
+  displayName: 'Install NPM Dependencies'
+
+- script: |
+    npx playwright install --with-deps
+  displayName: 'Install Playwright Browsers'
+
+- script: |
+    npm run test--${{ parameters.testEnvironment }}
+  displayName: 'Run Playwright Tests on ${{ parameters.testEnvironment }}'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'reports'
+    artifact: 'playwright-html-report'
+    publishLocation: 'pipeline'
+  condition: succeededOrFailed()
+  displayName: 'Publish HTML Report'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'failure-screenshots'
+    artifact: 'failure-screenshots'
+    publishLocation: 'pipeline'
+  condition: failed()
+  displayName: 'Publish Failure Screenshots'

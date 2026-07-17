@@ -54,7 +54,7 @@ test.describe('Component UI Validation', () => {
     test('Carousel UI Testing', { tag: '@Carousel' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication('/adviser/bespoke-components/carousel');
+        await webCommons.launchApplication('/adviser/bespoke-components/ui/carousel');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
 

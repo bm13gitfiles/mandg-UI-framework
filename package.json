@@ -13,7 +13,9 @@
     "@cucumber/cucumber": "^12.8.3",
     "@playwright/test": "^1.59.1",
     "@types/nodemailer": "^8.0.1",
+    "adm-zip": "^0.6.0",
     "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   },

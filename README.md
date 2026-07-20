@@ -87,23 +87,60 @@ graph TD
     I -->|Mismatch| K[Fail & Capture Diff]
 ```
 
-### 📂 Directory Structure
+### 📂 Directory Structure & File Purposes
 
 ```text
 mandg-UI-framework/
-├── assets/                  # Documentation assets (like the banner above)
-├── BaseLineImages/          # The 'source of truth' screenshots for visual testing
+├── .env                       # (Ignored in Git) Stores secure Microsoft Graph API credentials.
+├── .gitignore                 # Prevents sensitive files (like .env or large zips) from being committed.
+├── playwright.config.ts       # The main orchestration brain; sets viewports, timeouts, and report generation.
+├── global-teardown.ts         # Runs after all tests finish. Zips reports and triggers the EmailReporter.
+├── Jenkinsfile                # Declarative CI/CD pipeline definition.
+├── README.md                  # This documentation file.
+│
+├── BaseLineImages/            # The 'source of truth' pristine screenshots for visual comparison.
+├── failure-screenshots/       # (Auto-generated) Holds visual diffs and traces of failed tests.
+├── reports/                   # (Auto-generated) The HTML report output folder.
+│
 ├── commons/
-│   └── ui/                  # Helper classes (web-commons.ts, ui-commons.ts)
-├── config/                  # Configuration JSON files (components-url.json)
-├── page-objects/            # Page Elements and Step definitions
-├── tests/
-│   ├── global-setup.ts      # The script that authenticates the browser globally
-│   └── ui/
-│       └── component-ui.spec.ts # The primary test suite containing all components
-├── playwright.config.ts     # Playwright orchestration and viewport definitions
-└── Jenkinsfile              # Declarative CI/CD pipeline definition
+│   ├── reporting/             # Fully automated email reporting system.
+│   │   ├── AttachmentCollector.ts # Gathers failure screenshots and reports for emailing.
+│   │   ├── EmailReporter.ts       # Uses OAuth 2.0 & Graph API to securely dispatch the final email.
+│   │   ├── HtmlTemplate.ts        # Generates the beautiful HTML body of the email.
+│   │   └── ReportBuilder.ts       # Parses the raw XML test results to calculate passed/failed stats.
+│   └── ui/                    # Reusable framework utilities.
+│       ├── ui-commons.ts          # Advanced visual test helpers (handling sticky headers, lazy loading, etc).
+│       └── web-commons.ts         # Standard web interaction wrappers (clicks, typing, assertions).
+│
+├── page-objects/
+│   ├── page-elements/             # JSON files containing web element locators.
+│   └── page-steps/                # Abstractions for complex user flows (e.g., mandg-page-steps.ts).
+│
+└── tests/
+    ├── global-setup.ts        # Runs before tests start. Bypasses cookie banners and saves the browser state.
+    └── ui/
+        └── component-ui.spec.ts   # The primary test suite containing all 295+ bespoke UI tests.
 ```
+
+---
+
+## 📧 Microsoft Graph API Email Reporting
+
+This framework features a fully automated reporting engine that runs during the `global-teardown.ts` phase. Upon completion of the test suite, it collects the HTML report, gathers any failure screenshots, and securely emails a comprehensive summary to the stakeholders.
+
+### Configuration (`.env`)
+
+To enable the email reporting, you must configure a `.env` file in the root directory (this file is strictly ignored by Git for security). It requires Microsoft Graph API OAuth 2.0 credentials:
+
+```properties
+# Microsoft Graph API Credentials
+GRAPH_CLIENT_ID=your_client_id_here
+GRAPH_CLIENT_SECRET=your_client_secret_here
+GRAPH_TENANT_ID=common
+GRAPH_REFRESH_TOKEN=your_long_lived_refresh_token_here
+```
+
+The `EmailReporter.ts` class automatically exchanges the `GRAPH_REFRESH_TOKEN` for a short-lived access token on every single test run, ensuring secure, headless authentication without any manual intervention.
 
 ---
 

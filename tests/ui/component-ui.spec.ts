@@ -347,7 +347,7 @@ test.describe('Component UI Validation', () => {
         await UICommons.assertFullPage(page, ['Document Centre', 'document-centre-page-expected.png']);
     });
 
-    test.only('Video UI Testing', { tag: '@Video' }, async ({ page }) => {
+    test('Video UI Testing', { tag: '@Video' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
         await webCommons.launchApplication('/adviser/bespoke-components/ui/video');

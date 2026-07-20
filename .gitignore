@@ -6,6 +6,10 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-reports/
+
+# Reporting & Temporary Folders
+scratch/
 failure-screenshots/
-storageState.json
+results.xml
+.env
+playwright-report.zip

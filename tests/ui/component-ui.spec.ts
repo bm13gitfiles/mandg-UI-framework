@@ -63,7 +63,7 @@ test.describe('Component UI Validation', () => {
     test('Carousel UI Testing', { tag: '@Carousel' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication('/adviser/bespoke-components/ui/carousel');
+        await webCommons.launchApplication('/adviser/bespoke-components/carousel');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -206,7 +206,7 @@ test.describe('Component UI Validation', () => {
     });
 
 
-    test.skip('Flourish Scrolly UI Testing', { tag: '@Flourish' }, async ({ page }) => {
+    test('Flourish Scrolly UI Testing', { tag: '@Flourish' }, async ({ page }) => {
         test.setTimeout(180000);
 
         const webCommons = new WebCommons(page);
@@ -216,17 +216,16 @@ test.describe('Component UI Validation', () => {
             '/adviser/bespoke-components/ui/flourish-story'
         );
 
-        // Ensure the page is fully loaded and ready
         await UICommons.ensurePageReadyForTesting(page);
 
-        // Wait for the page layout to stabilise
+        await UICommons.loadLazyFlourish(page);
+
+        await UICommons.freezeFlourish(page);
+
         await UICommons.waitForStableHeight(page);
+
         await UICommons.forceRepaint(page);
-        await UICommons.resizeViewportToContent(page);
 
-        await webCommons.waitForSeconds(2);
-
-        // Full-page visual comparison
         await UICommons.assertFullPage(
             page,
             ['Flourish Scrolly', 'flourish-scrolly-page-expected.png']
@@ -348,12 +347,13 @@ test.describe('Component UI Validation', () => {
         await UICommons.assertFullPage(page, ['Document Centre', 'document-centre-page-expected.png']);
     });
 
-    test('Video UI Testing', { tag: '@Video' }, async ({ page }) => {
+    test.only('Video UI Testing', { tag: '@Video' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication('/adviser/bespoke-components/video');
+        await webCommons.launchApplication('/adviser/bespoke-components/ui/video');
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
+        await UICommons.resizeViewportToContent(page);
 
 
         await UICommons.assertFullPage(page, ['Video', 'video-page-expected.png']);
@@ -652,7 +652,7 @@ test.describe('Component UI Validation', () => {
         await UICommons.assertFullPage(page, ['Teaser With Image And Text', 'teaser-with-image-and-text-page-expected.png']);
     });
 
-    test.only('Teaser Cards With CTA UI Testing', { tag: '@TeaserCardsWithCTA' }, async ({ page }) => {
+    test('Teaser Cards With CTA UI Testing', { tag: '@TeaserCardsWithCTA' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
         await webCommons.launchApplication('/adviser/core-components/teaser-cards-with-cta');

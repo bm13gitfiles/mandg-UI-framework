@@ -15,6 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   globalSetup: './tests/global-setup.ts',
+  globalTeardown: './global-teardown.ts',
   timeout: 60000,
   testDir: './tests',
   /* Route snapshots to BaseLineImages folder */
@@ -30,7 +31,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : '50%',
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { outputFolder: 'reports' }]],
+  reporter: [
+    ['html', { outputFolder: 'reports' }],
+    ['junit', { outputFile: 'results.xml' }]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
 

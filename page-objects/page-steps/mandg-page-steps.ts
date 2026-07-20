@@ -22,7 +22,7 @@ export class MandgPageSteps {
             timeout: 5000
         });
 
-        console.log('✅ OneTrust Cookie Banner is displayed.');
+        console.log('✅ ONETRUST COOKIE BANNER IS DISPLAYED.');
     }
 
     async submitLeadGenForm() {
@@ -30,7 +30,7 @@ export class MandgPageSteps {
             const locator = PageElements['lead-gen-form-submit-button'];
             await this.webCommons.clickElement(locator);
         } catch (error) {
-            console.log('Lead gen form submission failed.');
+            console.log('LEAD GEN FORM SUBMISSION FAILED.');
         }
     }
 
@@ -46,7 +46,7 @@ export class MandgPageSteps {
             await this.webCommons.waitForSeconds(0.5);
         } catch (error) {
             // If the banner doesn't appear within 3 seconds, we just proceed with the test
-            console.log('Cookie banner not found or already accepted.');
+            console.log('COOKIE BANNER NOT FOUND OR ALREADY ACCEPTED.');
         }
     }
 }

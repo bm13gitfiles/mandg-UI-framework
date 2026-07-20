@@ -3,6 +3,8 @@
     "@types/node": "^25.6.0",
     "@types/pg": "^8.20.0",
     "excel": "^1.0.1",
+    "fast-xml-parser": "^5.10.1",
+    "nodemailer": "^9.0.3",
     "pdf-parse-new": "^2.1.0",
     "pg": "^8.20.0",
     "xlsx": "^0.18.5"
@@ -10,6 +12,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^12.8.3",
     "@playwright/test": "^1.59.1",
+    "@types/nodemailer": "^8.0.1",
     "cross-env": "^10.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"

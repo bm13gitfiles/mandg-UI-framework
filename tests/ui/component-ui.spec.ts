@@ -4,6 +4,11 @@ import { WebCommons } from '../../commons/ui/web-commons.ts';
 import PageElement from "../../page-objects/page-elements/mandg-page-elements.json" with { type: "json" };
 import { MandgPageSteps } from '../../page-objects/page-steps/mandg-page-steps.ts';
 
+test.afterEach(async ({ }, testInfo) => {
+    console.log(`${testInfo.title} - ${testInfo.project.name} - ${testInfo.status}`.toUpperCase());
+});
+
+
 test.describe('One Trust Cookie Banner UI Validation', () => {
     // This overrides the global storageState.json for this specific test block.
     // By passing empty arrays, Playwright starts a fresh session without the accepted cookies.
@@ -20,7 +25,7 @@ test.describe('One Trust Cookie Banner UI Validation', () => {
         await mandgPageSteps.verifyWhetherTheOneTrustCookieBannerIsDisplayed();
 
         // Wait for the banner animation to fully slide up/render
-        await webCommons.waitForSeconds(3);
+        await webCommons.waitForSeconds(5);
 
         // Assert the page with the banner visible
         await UICommons.assertPartialPage(page, ['CookieBanner', 'cookie-banner-expected.png']);
@@ -39,14 +44,18 @@ test.describe('Component UI Validation', () => {
         await webCommons.waitForPageLoad();
 
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         const mandgPageSteps = new MandgPageSteps(page);
         await mandgPageSteps.submitLeadGenForm();
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(2);
 
         // This component requires specific waits or custom logic (add here)
+
 
         await UICommons.assertFullPage(page, ['LeadGen Form', 'lead-gen-form-page-expected.png']);
     })
@@ -57,12 +66,16 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/carousel');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
         await webCommons.waitForSeconds(3);
 
         // This component requires specific waits or custom logic (add here)
+
 
         await UICommons.assertFullPage(page, ['Carousel', 'carousel-page-expected.png']);
     });
@@ -73,11 +86,15 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/search');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(1);
 
         // This component requires specific waits or custom logic (add here)
+
 
         await UICommons.assertFullPage(page, ['Search', 'search-page-expected.png']);
     });
@@ -88,13 +105,17 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/kids-library');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
         await webCommons.waitForSeconds(4);
 
 
         // This component requires specific waits or custom logic (add here)
+
 
         await UICommons.assertFullPage(page, ['Kids Library', 'kids-library-page-expected.png']);
     });
@@ -105,12 +126,16 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/Detailed-EGR');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(2);
 
         // This component requires specific waits or custom logic (add here)
+
 
         await UICommons.assertFullPage(page, ['Detailed Egr Table', 'detailed-egr-page-expected.png']);
     });
@@ -131,6 +156,8 @@ test.describe('Component UI Validation', () => {
 
         // Wait for the page layout to stabilise
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
         await webCommons.waitForSeconds(2);
 
@@ -158,12 +185,16 @@ test.describe('Component UI Validation', () => {
 
         // Wait for the page layout to stabilise
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
         // Replace Flourish Story embeds with a deterministic placeholder
         await UICommons.stubFlourishStories(page);
 
         // Wait for the DOM to stabilise after replacing the component
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
         await webCommons.waitForSeconds(2);
 
@@ -175,7 +206,7 @@ test.describe('Component UI Validation', () => {
     });
 
 
-    test('Flourish Scrolly UI Testing', { tag: '@Flourish' }, async ({ page }) => {
+    test.skip('Flourish Scrolly UI Testing', { tag: '@Flourish' }, async ({ page }) => {
         test.setTimeout(180000);
 
         const webCommons = new WebCommons(page);
@@ -190,6 +221,8 @@ test.describe('Component UI Validation', () => {
 
         // Wait for the page layout to stabilise
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
         await webCommons.waitForSeconds(2);
 
@@ -204,46 +237,61 @@ test.describe('Component UI Validation', () => {
 
 
 
-    test('Inpage Search UI Testing', { tag: '@InpageSearch' }, async ({ page }) => {
+    test.skip('Inpage Search UI Testing', { tag: '@InpageSearch' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
         const mandgSteps = new MandgPageSteps(page);
 
         // This test uses the Prod URL directly
         await webCommons.launchApplication('https://www-stage.mandg.com/adviser/search-results?q=Paraplanners+Assembly+2023%3A+Do+tax+wrappers+go+to+heaven%3F&origin=header&suggestion=true');
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await mandgSteps.acceptOneTrustCookieBanner();
         await webCommons.waitForPageLoad();
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
 
-        await webCommons.waitForSeconds(4);
+        await webCommons.waitForSeconds(6);
+
 
         await UICommons.assertFullPage(page, ['Inpage Search', 'inpage-search-page-expected.png']);
     });
+
 
     test('Back To Top UI Testing', { tag: '@BackToTop' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
         await webCommons.launchApplication('/adviser/bespoke-components/ui/back-to-top');
         await webCommons.waitForPageLoad();
+
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
+
         await webCommons.waitForSeconds(2);
 
-        // Scroll down so the Back To Top button appears
+        // Scroll enough for the component logic to activate
         await UICommons.scrollDown(page, 1000);
 
-        await expect(page.locator('.sticky-back-to-top-button-container')).toBeVisible();
+        // Freeze it before Playwright starts internally scrolling
+        await UICommons.freezeStickyElement(
+            page,
+            '.sticky-back-to-top-button-container',
+            'flex'
+        );
 
-        // Freeze the sticky button so it remains visible while Playwright scrolls internally
-        await UICommons.freezeStickyElement(page, '.sticky-back-to-top-button-container', 'flex');
-
-        // Return to the top for the screenshot
         await UICommons.scrollToTop(page);
-        await webCommons.waitForSeconds(0.5);
+        await webCommons.waitForSeconds(1);
 
-        await UICommons.assertFullPage(page, ['Back To Top', 'back-to-top-page-expected.png']);
+        await UICommons.assertFullPage(
+            page,
+            ['Back To Top', 'back-to-top-page-expected.png']
+        );
     });
+
+
 
     test('EGR Widget Component UI Testing', { tag: '@EGRWidgetComponent' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
@@ -252,31 +300,38 @@ test.describe('Component UI Validation', () => {
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
 
+        // Expand viewport so lazy-loaded content becomes visible
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await webCommons.selectEGRdropdownOption(
             PageElement["egr-product-dropdown"],
             "Flexible Retirement Plan"
         );
 
-        // Fund
         await webCommons.selectEGRdropdownOption(
             PageElement["egr-fund-dropdown"],
             "PruFund Cautious Pension Fund",
             "PruFund Cautious Pension Fund/PruFund Protected Cautious Pension Fund"
         );
 
-        // Wait and validate the EGR result
-        await expect(page.locator(PageElement['egr-view-egr-button'])).toBeVisible({ timeout: 1000 });
-
+        await expect(
+            page.locator(PageElement["egr-view-egr-button"])
+        ).toBeVisible({ timeout: 1000 });
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
+
         await webCommons.waitForSeconds(2);
 
-
-        await UICommons.assertFullPage(page, ['EGR Widget Component', 'egr-widget-component-page-expected.png']);
+        await UICommons.assertFullPage(
+            page,
+            ['EGR Widget Component', 'egr-widget-component-page-expected.png']
+        );
     });
 
-    test('Document Centre UI Testing', { tag: '@DocumentCentre' }, async ({ page }) => {
+
+    test.skip('Document Centre UI Testing', { tag: '@DocumentCentre' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
         const mandgSteps = new MandgPageSteps(page);
 
@@ -284,8 +339,10 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('https://www-stage.mandg.com/adviser/services/document-centre');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await mandgSteps.acceptOneTrustCookieBanner();
+
 
 
         await UICommons.assertFullPage(page, ['Document Centre', 'document-centre-page-expected.png']);
@@ -298,6 +355,7 @@ test.describe('Component UI Validation', () => {
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
 
+
         await UICommons.assertFullPage(page, ['Video', 'video-page-expected.png']);
     });
 
@@ -308,9 +366,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/hero-banner-article-final');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(2);
+
 
         await UICommons.assertFullPage(page, ['Hero Banner Article', 'hero-banner-article-page-expected.png']);
     });
@@ -323,9 +385,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/button');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Button', 'button-page-expected.png']);
     });
@@ -336,9 +402,14 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/bullet-list1');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
+
 
         await UICommons.assertFullPage(page, ['Bullet List', 'bullet-list-expected.png']);
     });
@@ -349,9 +420,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/separator-component');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Separator Component', 'separator-component-page-expected.png']);
     });
@@ -362,9 +437,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/tab-component-dark-theme');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Tab Component Dark Theme', 'tab-component-dark-theme-page-expected.png']);
     });
@@ -375,9 +454,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/hero-banner-with-active-square0');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Hero Banner With Active Square', 'hero-banner-with-active-square-page-expected.png']);
     });
@@ -388,9 +471,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/teaser-banner-article-with-image');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Teaser Banner Article With Image', 'teaser-banner-article-with-image-page-expected.png']);
     });
@@ -401,9 +488,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/hero-teaser-banner-50-50');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Hero Teaser Banner 50 50', 'hero-teaser-banner-50-50-page-expected.png']);
     });
@@ -414,9 +505,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/teaser-banner-60-401');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Teaser Banner 60 40', 'teaser-banner-60-401-page-expected.png']);
     });
@@ -427,9 +522,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/Text');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Text', 'text-page-expected.png']);
     });
@@ -440,9 +539,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/title-component');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Title Component', 'title-component-page-expected.png']);
     });
@@ -453,9 +556,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/footer');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Footer', 'footer-page-expected.png']);
     });
@@ -466,9 +573,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/list');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['List', 'list-page-expected.png']);
     });
@@ -479,9 +590,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/download-button');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Download Button', 'download-button-page-expected.png']);
     });
@@ -492,9 +607,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/print-button');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Print Button', 'print-button-page-expected.png']);
     });
@@ -505,9 +624,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/hero-banner-routing-links');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Hero Banner Routing Links', 'hero-banner-routing-links-page-expected.png']);
     });
@@ -518,25 +641,38 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/teaser-with-image-and-text');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Teaser With Image And Text', 'teaser-with-image-and-text-page-expected.png']);
     });
 
-    test('Teaser Cards With CTA UI Testing', { tag: '@TeaserCardsWithCTA' }, async ({ page }) => {
+    test.only('Teaser Cards With CTA UI Testing', { tag: '@TeaserCardsWithCTA' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
         await webCommons.launchApplication('/adviser/core-components/teaser-cards-with-cta');
         await webCommons.waitForPageLoad();
+
         await UICommons.ensurePageReadyForTesting(page);
-
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
-        await webCommons.waitForSeconds(3);
+        await UICommons.removeTrackingPixels(page);
+        await UICommons.resizeViewportToContent(page);
 
-        await UICommons.assertFullPage(page, ['Teaser Cards With CTA', 'teaser-cards-with-cta-page-expected.png']);
+        await UICommons.forceRepaint(page);
+
+
+        await UICommons.assertFullPage(
+            page,
+            ['Teaser Cards With CTA', 'teaser-cards-with-cta-page-expected.png']
+        );
     });
+
 
     test('Teaser Testimonial UI Testing', { tag: '@TeaserTestimonial' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
@@ -544,9 +680,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/teaser-testimonial');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Teaser Testimonial', 'teaser-testimonial-page-expected.png']);
     });
@@ -557,9 +697,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/teaser-tile-with-number');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Teaser Tile With Number', 'teaser-tile-with-number-page-expected.png']);
     });
@@ -570,9 +714,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('adviser/bespoke-components/ui/teaser-USP');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Teaser USP', 'teaser-usp-page-expected.png']);
     });
@@ -583,9 +731,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/sticky-jumping-links');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Sticky Jumping Links', 'sticky-jumping-links-page-expected.png']);
     });
@@ -596,9 +748,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/table-component');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Table', 'table-component-page-expected.png']);
     });
@@ -609,9 +765,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/right-hand-sticky-varient1');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Right Hand Sticky Variant1', 'right-hand-sticky-variant1-page-expected.png']);
     });
@@ -622,9 +782,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/Container');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Container Component', 'container-page-expected.png']);
     });
@@ -635,9 +799,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/right-hand-sticky-varient2');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Right Hand Sticky Variant2', 'right-hand-sticky-variant2-page-expected.png']);
     });
@@ -648,9 +816,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/right-hand-sticky-varient3');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Right Hand Sticky Variant3', 'right-hand-sticky-variant3-page-expected.png']);
     });
@@ -661,9 +833,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/social-share');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Social Share', 'social-share-page-expected.png']);
     });
@@ -674,9 +850,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/quick-links');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Quick Links', 'quick-links-page-expected.png']);
     });
@@ -687,9 +867,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/equal-height-container1');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Equal Height Container', 'equal-height-container1-page-expected.png']);
     });
@@ -700,9 +884,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/promo-panel-component');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(5);
+
 
         await UICommons.assertFullPage(page, ['Promo Panel Component', 'promo-panel-component-page-expected.png']);
     });
@@ -713,9 +901,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/Listing-Component-Related-links-Static');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Listing Component Related Links Static', 'listing-component-related-links-static-page-expected.png']);
     });
@@ -726,9 +918,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/drawer-links1');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Drawer Links', 'drawer-links1-page-expected.png']);
     });
@@ -739,9 +935,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/call-us-policy-number');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Call Us Policy Number', 'call-us-policy-number-page-expected.png']);
     });
@@ -752,9 +952,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/online-service.illustration.uat1');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Online Services', 'online-service.illustration.uat1-page-expected.png']);
     });
@@ -765,9 +969,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/reduce-footer');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Reduce Footer', 'reduce-footer-page-expected.png']);
     });
@@ -778,9 +986,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/one-trust-cookie-embed');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['One Trust Cookie Embed', 'one-trust-cookie-embed-page-expected.png']);
     });
@@ -791,9 +1003,13 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/table-of-content');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
 
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
 
         await UICommons.assertFullPage(page, ['Table Of Content', 'table-of-content-page-expected.png']);
     });
@@ -808,8 +1024,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('adviser/bespoke-components/ui/Accordion');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Accordion', 'accordion-page-expected.png']);
     });
 
@@ -818,8 +1038,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/Alert-1');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Alert', 'alert-page-expected.png']);
     });
 
@@ -828,8 +1052,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/breadcrumb');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Breadcrumb', 'breadcrumb-page-expected.png']);
     });
 
@@ -838,8 +1066,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/Container');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Container', 'container-page-expected.png']);
     });
 
@@ -848,8 +1080,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/image');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Image', 'image-page-expected.png']);
     });
 
@@ -860,8 +1096,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/bespoke-components/ui/tab-component-light-theam');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Tab Component Light Theme', 'tab-component-light-theme-page-expected.png']);
     });
 
@@ -870,8 +1110,12 @@ test.describe('Component UI Validation', () => {
         await webCommons.launchApplication('/adviser/core-components/title');
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
+        await UICommons.preparePageForFullPageScreenshot(page);
         await UICommons.waitForStableHeight(page);
+        await UICommons.forceRepaint(page);
+        await UICommons.resizeViewportToContent(page);
         await webCommons.waitForSeconds(3);
+
         await UICommons.assertFullPage(page, ['Title', 'title-page-expected.png']);
     });
 

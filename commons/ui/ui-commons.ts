@@ -1,6 +1,10 @@
 import { Page, Locator, expect } from '@playwright/test';
 import PageElements from '../../page-objects/page-elements/mandg-page-elements.json' with { type: 'json' };
 
+
+
+
+
 export class UICommons {
     /**
      * Performs visual testing (screenshot comparison) on the entire page.
@@ -18,6 +22,73 @@ export class UICommons {
         });
     }
 
+
+    public static async removeTrackingPixels(page: Page) {
+        await page.evaluate(() => {
+
+            document
+                .querySelectorAll("img,iframe")
+                .forEach((el: any) => {
+
+                    const rect = el.getBoundingClientRect();
+
+                    if (
+                        rect.width <= 2 &&
+                        rect.height <= 2
+                    ) {
+                        el.remove();
+                    }
+                });
+
+        });
+    }
+
+    /**
+ * Resizes the viewport to match the current page content height.
+ *
+ * Useful when the page changes after interactions (dropdowns, accordions,
+ * AJAX content, EGR widgets, etc.) after using
+ * preparePageForFullPageScreenshot().
+ *
+ * This removes the large temporary viewport (e.g. 12000px) and prevents
+ * excessive whitespace at the bottom of screenshots.
+ *
+ * @param page Playwright Page instance.
+ */
+    public static async resizeViewportToContent(page: Page): Promise<void> {
+
+        const pageHeight = await page.evaluate(() =>
+            document.body.scrollHeight
+        );
+
+        await page.setViewportSize({
+            width: page.viewportSize()!.width,
+            height: pageHeight
+        });
+
+        await page.waitForTimeout(500);
+    }
+
+    public static async forceRepaint(page: Page): Promise<void> {
+        await page.evaluate(async () => {
+            document.body.style.transform = "translateZ(0)";
+
+            // Force a synchronous layout
+            void document.body.offsetHeight;
+
+            // Wait for two paint frames
+            await new Promise<void>(resolve => {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        resolve();
+                    });
+                });
+            });
+
+            // Clean up
+            document.body.style.transform = "";
+        });
+    }
 
     public static async checkAccessDeniedError(page: Page): Promise<boolean> {
         const isAccessDenied = await page.locator("h1", { hasText: "Access Denied" }).isVisible({ timeout: 1000 });
@@ -47,6 +118,25 @@ export class UICommons {
         return false;
     }
 
+    public static async waitForCssMasks(page: Page): Promise<void> {
+        await page.waitForFunction(() => {
+
+            const icons = Array.from(document.querySelectorAll(".icon"));
+
+            if (!icons.length) return true;
+
+            return icons.every(icon => {
+                const style = getComputedStyle(icon);
+
+                return (
+                    style.maskImage !== "none" ||
+                    style.webkitMaskImage !== "none"
+                );
+            });
+
+        });
+    }
+
 
     public static async ensurePageReadyForTesting(page: Page): Promise<void> {
         // SMARTER APPROACH:
@@ -72,7 +162,7 @@ export class UICommons {
             await page.waitForTimeout(500); // Allow time for the banner to animate out
         }
 
-        console.log("page is good to go");
+        console.log("PAGE IS GOOD TO GO");
     }
 
 
@@ -230,11 +320,11 @@ export class UICommons {
 
         const count = await embeds.count();
 
-        console.log(`Found ${count} Flourish embeds`);
+        console.log(`FOUND ${count} FLOURISH EMBEDS`);
 
         for (let i = 0; i < count; i++) {
 
-            console.log(`Loading Flourish ${i + 1}/${count}`);
+            console.log(`LOADING FLOURISH ${i + 1}/${count}`);
 
             await embeds.nth(i).scrollIntoViewIfNeeded();
 
@@ -266,76 +356,83 @@ export class UICommons {
 
 
     /**
- * Prepares a page for full-page visual regression testing.
- *
- * Why is this needed?
- * -------------------
- * Some components (videos, lazy-loaded images, maps, charts, etc.) are
- * initialized only when they enter the viewport using mechanisms such as
- * IntersectionObserver or lazy loading.
- *
- * During Playwright's full-page screenshot process, these components may
- * not initialize because only the initially visible viewport is rendered.
- *
- * To mimic the behaviour used by AET, this helper:
- * 1. Expands the browser viewport to a very large height so that all
- *    lazy-loaded components become visible immediately.
- * 2. Waits for the page and lazy components to finish rendering.
- * 3. Measures the actual page height.
- * 4. Resizes the viewport back to the real page height to remove the
- *    unnecessary whitespace before taking the screenshot.
- *
- * This helper should be called immediately after navigating to the page
- * and before any visual comparison.
- *
- * @param page Playwright Page instance.
- * @param width Browser viewport width. Defaults to 1440px.
- * @param initialHeight Large temporary viewport height used to initialize
- *                      lazy-loaded content. Defaults to 12000px.
- * @param waitTime Time (milliseconds) to allow lazy content to initialise.
- *                 Defaults to 5000ms.
- */
+    * Prepares a page for full-page visual regression testing.
+    *
+    * The current viewport width (Desktop/Tablet/Mobile) is preserved.
+    * The viewport height is temporarily expanded to trigger lazy-loaded
+    * content, then resized back to the actual page height.
+    */
     public static async preparePageForFullPageScreenshot(
         page: Page,
-        width: number = 1440,
         initialHeight: number = 12000,
-        waitTime: number = 5000
+        waitTime: number = 3000
     ): Promise<void> {
 
-        // Step 1:
-        // Expand the viewport so every lazy-loaded component becomes visible.
+        // Preserve the current viewport (Desktop / Tablet / Mobile)
+        const viewport = page.viewportSize();
+
+        if (!viewport) {
+            throw new Error("Unable to determine current viewport size.");
+        }
+
+        const { width } = viewport;
+
+        // Expand viewport vertically to initialise lazy-loaded content
         await page.setViewportSize({
             width,
             height: initialHeight
         });
 
-        // Step 2:
-        // Wait until the page has completely loaded.
+        // Wait for the page to finish loading
         await page.waitForLoadState("domcontentloaded");
         await page.waitForLoadState("load");
 
-        // Step 3:
-        // Allow lazy-loaded components (videos, images, etc.) enough time
-        // to initialise after becoming visible.
+        // Allow lazy-loaded components to initialise
         await page.waitForTimeout(waitTime);
 
-        // Step 4:
-        // Determine the actual height of the rendered page.
-        const actualPageHeight = await page.evaluate(
-            () => document.body.scrollHeight
-        );
+        // Measure the actual rendered page height
+        const actualPageHeight = await page.evaluate(() => {
+            return Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.offsetHeight
+            );
+        });
 
-        // Step 5:
-        // Resize the viewport to the page's real height.
-        // This removes the large blank area introduced by the temporary viewport.
+        // Resize back to the real page height while preserving width
         await page.setViewportSize({
             width,
             height: actualPageHeight
         });
 
-        // Small delay to allow layout to stabilise after resizing.
+        // Allow layout to stabilise after resizing
         await page.waitForTimeout(1000);
     }
+
+    public static async prepareLazyContent(
+        page: Page,
+        waitTime: number = 3000
+    ): Promise<void> {
+
+        const viewport = page.viewportSize();
+
+        if (!viewport) {
+            return;
+        }
+
+        await page.setViewportSize({
+            width: viewport.width,
+            height: 12000
+        });
+
+        await page.waitForTimeout(waitTime);
+
+        await page.setViewportSize(viewport);
+
+        await page.waitForTimeout(500);
+    }
+
 
 
     /**
@@ -453,4 +550,55 @@ export class UICommons {
         return [];
     }
 
+
+
+
+
+
+
+    /**
+ * Waits until an element is actually visible on the page.
+ *
+ * Unlike locator.toBeVisible(), this waits for the computed styles
+ * (display, visibility, opacity) to reach a visible state.
+ *
+ * @param page Playwright page.
+ * @param selector CSS selector of the element.
+ * @param timeout Maximum wait time in milliseconds.
+ */
+    public static async waitForElementToBecomeVisible(
+        page: Page,
+        selector: string,
+        timeout: number = 5000
+    ): Promise<void> {
+
+        await page.waitForFunction(
+            (selector) => {
+                const el = document.querySelector(selector) as HTMLElement | null;
+
+                if (!el) return false;
+
+                const style = getComputedStyle(el);
+
+                return (
+                    style.display !== "none" &&
+                    style.visibility !== "hidden" &&
+                    style.opacity !== "0"
+                );
+            },
+            selector,
+            { timeout }
+        );
+    }
+
+
+
+
+
+
 }
+
+
+
+
+

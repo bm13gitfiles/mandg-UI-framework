@@ -2,7 +2,7 @@ import { chromium, FullConfig } from '@playwright/test';
 import { MandgPageSteps } from '../page-objects/page-steps/mandg-page-steps.ts';
 
 async function globalSetup(config: FullConfig) {
-  console.log('Global Setup: Launching browser to accept cookies...');
+  console.log('GLOBAL SETUP: LAUNCHING BROWSER TO ACCEPT COOKIES...');
   
   // Launch a new browser instance
   const browser = await chromium.launch();
@@ -26,7 +26,7 @@ async function globalSetup(config: FullConfig) {
   await page.context().storageState({ path: 'storageState.json' });
   await browser.close();
   
-  console.log('Global Setup: Cookies accepted and state saved to storageState.json');
+  console.log('GLOBAL SETUP: COOKIES ACCEPTED AND STATE SAVED TO STORAGESTATE.JSON');
 }
 
 export default globalSetup;

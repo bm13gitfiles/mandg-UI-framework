@@ -121,7 +121,7 @@ async getResponse(requestType: string, endpoint: string, requestBody?: any){
     // Method to validate response time
     async validateResponseTime(maxAllowedMs: number) {
         const actualResponseTime = this.response.timing().responseEnd - this.response.timing().startTime;
-        console.log(`Response time: ${actualResponseTime} ms`);
+        console.log(`RESPONSE TIME: ${actualResponseTime} MS`);
         expect(actualResponseTime).toBeLessThanOrEqual(maxAllowedMs);
     }
 

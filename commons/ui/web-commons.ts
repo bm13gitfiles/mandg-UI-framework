@@ -55,7 +55,7 @@ export class WebCommons {
             // Clean up
             await newPage.close();
         } catch (error) {
-            console.error(`Failed to open or verify new tab for locator: ${locator}`);
+            console.error(`FAILED TO OPEN OR VERIFY NEW TAB FOR LOCATOR: ${locator}`);
             throw error;
         }
     }
@@ -248,7 +248,7 @@ export class WebCommons {
             throw new Error(`Expected value - ${expected} not matched with Actual - ${actual}`);
         }
         else {
-            console.log("Pokemon #0132")
+            console.log("POKEMON #0132")
         }
     }
 

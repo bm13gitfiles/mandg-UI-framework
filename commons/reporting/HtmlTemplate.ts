@@ -653,7 +653,7 @@ color:#111827;
 border-top:1px solid #f3f4f6;
 ">
 
-\${summary.duration.toFixed(2)} seconds
+${summary.duration.toFixed(2)} seconds
 
 </td>
 
@@ -680,7 +680,7 @@ color:#111827;
 border-top:1px solid #f3f4f6;
 ">
 
-\${executionDate}
+${executionDate}
 
 </td>
 
@@ -704,11 +704,11 @@ Status
 style="
 padding:14px 18px;
 font-weight:700;
-color:\${statusColour};
+color:${statusColour};
 border-top:1px solid #f3f4f6;
 ">
 
-\${statusEmoji} \${reportStatus}
+${statusEmoji} ${reportStatus}
 
 </td>
 
@@ -778,7 +778,7 @@ color:#1d4ed8;
 margin-top:8px;
 ">
 
-\${passRateText}%
+${passRateText}%
 
 </div>
 
@@ -811,7 +811,7 @@ color:#111827;
 margin-top:8px;
 ">
 
-\${total}
+${total}
 
 </div>
 
@@ -829,7 +829,7 @@ margin-top:8px;
 <!-- FAILED TESTS -->
 <!-- ===================================================== -->
 
-\${summary.failedTests.length > 0 ? \`
+${summary.failedTests.length > 0 ? \`
 
 <tr>
 
@@ -871,7 +871,7 @@ style="
 padding:0 35px 35px;
 ">
 
-\${summary.failedTests.map((test:any,index:number)=>\`
+${summary.failedTests.map((test:any,index:number)=>\`
 
 <table
 role="presentation"
@@ -912,7 +912,7 @@ font-weight:700;
 color:white;
 ">
 
-❌ \${test.name}
+❌ ${test.name}
 
 </div>
 
@@ -925,7 +925,7 @@ color:white;
 font-size:13px;
 ">
 
-Failure \${index+1}
+Failure ${index+1}
 
 </td>
 
@@ -973,7 +973,7 @@ white-space:pre-wrap;
 word-break:break-word;
 ">
 
-\${this.truncateMessage(test.failureMessage,450)}
+${this.truncateMessage(test.failureMessage,450)}
 
 </div>
 
@@ -1128,7 +1128,7 @@ Excellent! No failures were detected during this execution.
                                         </div>
 
                                         <div style="margin-top:6px;color:#475569;font-size:11px;">
-                                            © \${new Date().getFullYear()} UI Automation
+                                            © ${new Date().getFullYear()} UI Automation
                                         </div>
 
                                     </td>

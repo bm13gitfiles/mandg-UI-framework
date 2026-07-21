@@ -26,6 +26,15 @@ export default async () => {
         // Feed that scorecard into our HtmlTemplate to generate the final email body.
         const html = HtmlTemplate.generate(summary);
 
+        // Save a local copy of the email report so we can view it in the browser!
+        const reportsFolder = path.join(process.cwd(), "reports");
+        if (!fs.existsSync(reportsFolder)) {
+            fs.mkdirSync(reportsFolder, { recursive: true });
+        }
+        const emailPreviewPath = path.join(reportsFolder, "Email-Preview.html");
+        fs.writeFileSync(emailPreviewPath, html);
+        console.log(`GLOBAL TEARDOWN: SAVED EMAIL PREVIEW TO -> ${emailPreviewPath}`);
+
         // Define the folder where Playwright drops the final HTML test report.
         const reportsDir = path.join(process.cwd(), "reports");
         const attachments: any[] = [];

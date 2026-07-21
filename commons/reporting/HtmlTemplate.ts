@@ -829,7 +829,7 @@ ${total}
 <!-- FAILED TESTS -->
 <!-- ===================================================== -->
 
-${summary.failedTests.length > 0 ? \`
+${summary.failedTests.length > 0 ? `
 
 <tr>
 
@@ -871,7 +871,7 @@ style="
 padding:0 35px 35px;
 ">
 
-${summary.failedTests.map((test:any,index:number)=>\`
+${summary.failedTests.map((test:any,index:number)=>`
 
 <table
 role="presentation"
@@ -1030,15 +1030,15 @@ Failed
 
 </table>
 
-\`).join("")}
+`).join("")}
 
 </td>
 
 </tr>
 
-\`
+`
 :
-\`
+`
 <tr>
 
 <td
@@ -1107,7 +1107,7 @@ Excellent! No failures were detected during this execution.
 
 </tr>
 
-\`}
+`}
 
                                 <!-- Footer -->
                                 <tr>
@@ -1140,7 +1140,7 @@ Excellent! No failures were detected during this execution.
                 </table>
             </body>
         </html>
-        \`;
+        `;
     }
 
 
@@ -1163,3 +1163,4 @@ Excellent! No failures were detected during this execution.
     }
 
 }
+

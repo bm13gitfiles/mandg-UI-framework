@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.png" alt="M&G UI Automation Framework Banner" width="100%">
+  <img src="assets/final_presentation_slide.gif" alt="M&G UI Automation Framework Banner" width="100%">
   
 
   <h1>M&G UI Automation Framework</h1>

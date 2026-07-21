@@ -6,6 +6,12 @@ pipeline {
         TEST_ENV = 'stage'
         // Playwright uses this flag to automatically enable retries and fail on .only
         CI = 'true'
+        
+        // Bind Jenkins credentials to our framework's required environment variables
+        GRAPH_CLIENT_ID = credentials('graph-client-id')
+        GRAPH_CLIENT_SECRET = credentials('graph-client-secret')
+        GRAPH_TENANT_ID = credentials('graph-tenant-id')
+        GRAPH_REFRESH_TOKEN = credentials('graph-refresh-token')
     }
 
     stages {

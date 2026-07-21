@@ -26,14 +26,9 @@ export default async () => {
         // Feed that scorecard into our HtmlTemplate to generate the final email body.
         const html = HtmlTemplate.generate(summary);
 
-        // Define the folder where Playwright drops screenshots when a test fails.
-        const failureDir = path.join(process.cwd(), "failure-screenshots");
-        
-        // Send our AttachmentCollector into that folder to grab all the images.
-        const attachments = AttachmentCollector.collect(failureDir);
-
         // Define the folder where Playwright drops the final HTML test report.
         const reportsDir = path.join(process.cwd(), "reports");
+        const attachments: any[] = [];
         
         // Check to make sure the reports folder actually exists.
         if (fs.existsSync(reportsDir)) {
@@ -59,11 +54,11 @@ export default async () => {
             }
         }
 
-        // Print exactly how many attachments we found (screenshots + the report).
+        // Print exactly how many attachments we found (should be 1).
         console.log(`GLOBAL TEARDOWN: FOUND ${attachments.length} ATTACHMENTS.`);
 
-        // Pass the HTML email body and the list of attachments to the EmailReporter to send it!
-        await EmailReporter.send(html, attachments);
+        // Pass the HTML email body, attachments, and scorecard to the EmailReporter to send it!
+        await EmailReporter.send(html, attachments, summary);
     } catch (error) {
         // If anything crashes during this whole process, catch it and print the error so we can fix it.
         console.error("GLOBAL TEARDOWN ERROR:", error);

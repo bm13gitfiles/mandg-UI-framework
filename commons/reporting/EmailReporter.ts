@@ -6,6 +6,8 @@ import * as dotenv from "dotenv";
 // Tell dotenv to look for the .env file and load it into memory.
 dotenv.config();
 
+import { TestResultSummary } from "./ReportBuilder.js";
+
 // Export the EmailReporter class so our framework can use it to send emails.
 export class EmailReporter {
     /**
@@ -64,13 +66,18 @@ export class EmailReporter {
      * Sends the test execution report email containing the HTML summary and attachments.
      */
     // The main function that takes our HTML email code and any attachments (zip/png) and sends the email.
-    static async send(html: string, attachments: any[]): Promise<void> {
+    static async send(html: string, attachments: any[], summary: TestResultSummary): Promise<void> {
         try {
             // Print a message to let the user know we are starting the email process.
             console.log("PREPARING TO SEND EXECUTION REPORT EMAIL VIA GRAPH API...");
             
             // Get our VIP pass (access token) by running the login function above.
             const accessToken = await this.getAccessToken();
+
+            // Build dynamic subject line based on test execution status
+            const statusIcon = summary.failed > 0 ? "❌" : "✅";
+            const environment = process.env.TEST_ENV ? process.env.TEST_ENV.toUpperCase() : "STAGE";
+            const emailSubject = `${statusIcon} M&G UI Report | ${environment} | ${summary.passed} Passed | ${summary.failed} Failed`;
 
             // Loop through all our attachments to format them for Microsoft Graph.
             const graphAttachments = attachments.map(att => {
@@ -99,8 +106,8 @@ export class EmailReporter {
             // Build the final email package (the envelope and letter combined).
             const emailPayload = {
                 message: {
-                    // Set the subject line of the email.
-                    subject: "Playwright M&G Components - UI Automation Report",
+                    // Set the dynamic subject line of the email.
+                    subject: emailSubject,
                     body: {
                         // Tell Microsoft the email body is written in HTML.
                         contentType: "HTML",

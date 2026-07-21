@@ -43,11 +43,14 @@ export class ReportBuilder {
         // Convert the XML text into a Javascript object we can interact with.
         const report = parser.parse(xml);
 
-        // Start keeping score with zeros.
-        let passed = 0;
-        let failed = 0;
-        let skipped = 0;
-        let duration = 0;
+        // 1. Read summary from the root node (Highest Priority)
+        const root = report.testsuites ?? {};
+        const totalTests = parseInt(root["@_tests"] || "0");
+        const failed = parseInt(root["@_failures"] || "0");
+        const skipped = parseInt(root["@_skipped"] || "0");
+        const duration = parseFloat(root["@_time"] || "0");
+
+        const passed = totalTests - failed - skipped;
         
         // Create an empty list to hold the failed test details.
         const failedTests: Array<{ name: string; failureMessage: string }> = [];
@@ -55,7 +58,7 @@ export class ReportBuilder {
         // Try to find the section in the report called 'testsuites'.
         const testsuites = report.testsuites?.testsuite;
         
-        // If there are no test suites, return the empty scorecard.
+        // If there are no test suites, return the calculated scorecard early.
         if (!testsuites) return { passed, failed, skipped, duration, failedTests };
 
         // Sometimes there is one suite, sometimes multiple. This ensures it's always treated as a list.
@@ -63,24 +66,6 @@ export class ReportBuilder {
 
         // Look at every test suite one by one.
         for (const suite of suitesArray) {
-            // Read the total number of tests from the report.
-            const suiteTests = parseInt(suite['@_tests'] || '0');
-            // Read the number of failed tests.
-            const suiteFailures = parseInt(suite['@_failures'] || '0');
-            // Read the number of skipped tests.
-            const suiteSkipped = parseInt(suite['@_skipped'] || '0');
-            // Read how much time this suite took to run.
-            const suiteTime = parseFloat(suite['@_time'] || '0');
-
-            // Add this suite's failures to the total failure count.
-            failed += suiteFailures;
-            // Add this suite's skipped tests to the total skipped count.
-            skipped += suiteSkipped;
-            // Calculate passed tests by subtracting failures and skipped from the total.
-            passed += (suiteTests - suiteFailures - suiteSkipped);
-            // Add this suite's time to the total duration.
-            duration += suiteTime;
-
             // Get the list of individual test cases inside this suite.
             const cases = suite.testcase;
             // If there are no test cases, skip to the next suite.
@@ -91,14 +76,22 @@ export class ReportBuilder {
             
             // Look at every individual test case one by one.
             for (const tc of casesArray) {
-                // Check if this test case has a 'failure' recorded.
-                if (tc.failure) {
-                    // Extract the error message, checking different possible formats.
-                    const message = typeof tc.failure === 'object' ? tc.failure['@_message'] || tc.failure['#text'] || "Failed" : tc.failure;
-                    
+                // 2. Better failure parsing
+                if (tc.failure !== undefined) {
+                    let message = "Failed";
+
+                    if (typeof tc.failure === "string") {
+                        message = tc.failure;
+                    } else if (typeof tc.failure === "object") {
+                        message =
+                            tc.failure["@_message"] ??
+                            tc.failure["#text"] ??
+                            JSON.stringify(tc.failure);
+                    }
+
                     // Add the failed test's name and error message to our failed tests list.
                     failedTests.push({
-                        name: tc['@_name'] || 'Unknown Test',
+                        name: tc['@_name'] ?? 'Unknown Test',
                         failureMessage: message
                     });
                 }

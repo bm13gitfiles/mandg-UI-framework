@@ -41,7 +41,7 @@ test.describe('Component UI Validation', () => {
     test('LeadGen Form UI Testing', { tag: '@LeadGenForm' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.LEADGEN_FORM_BASE);
+        await webCommons.launchApplication(Routes.LEADGEN_FORM);
         await webCommons.waitForPageLoad();
 
         await UICommons.ensurePageReadyForTesting(page);
@@ -124,7 +124,7 @@ test.describe('Component UI Validation', () => {
     test('Detailed Egr Table UI Testing', { tag: '@DetailedEgrTable' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.DETAILED_EGR);
+        await webCommons.launchApplication(Routes.DETAILED_EGR_TABLE);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -242,7 +242,7 @@ test.describe('Component UI Validation', () => {
         const mandgSteps = new MandgPageSteps(page);
 
         // This test uses the Prod URL directly
-        await webCommons.launchApplication(Routes.SEARCH_RESULTSQPARAPLANNERSASSEMBLY2023DOTAXWRAPPERSGOTOHEAVENORIGINHEADERSUGGESTIONTRUE);
+        await webCommons.launchApplication(Routes.SEARCH_RESULTS);
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
 
@@ -400,7 +400,7 @@ test.describe('Component UI Validation', () => {
     test('Bullet List UI Testing', { tag: '@BulletList' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.BULLET_LIST1);
+        await webCommons.launchApplication(Routes.BULLET_LIST);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -452,7 +452,7 @@ test.describe('Component UI Validation', () => {
     test('Hero Banner With Active Square UI Testing', { tag: '@HeroBannerWithActiveSquare' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.HERO_BANNER_WITH_ACTIVE_SQUARE0);
+        await webCommons.launchApplication(Routes.HERO_BANNER_WITH_ACTIVE_SQUARE);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -503,7 +503,7 @@ test.describe('Component UI Validation', () => {
     test('Teaser Banner 60 40 UI Testing', { tag: '@TeaserBanner6040' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.TEASER_BANNER_60_401);
+        await webCommons.launchApplication(Routes.TEASER_BANNER_60_40);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -865,7 +865,7 @@ test.describe('Component UI Validation', () => {
     test('Equal Height Container UI Testing', { tag: '@EqualHeightContainer' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.EQUAL_HEIGHT_CONTAINER1);
+        await webCommons.launchApplication(Routes.EQUAL_HEIGHT_CONTAINER);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -950,7 +950,7 @@ test.describe('Component UI Validation', () => {
     test('Online Services UI Testing', { tag: '@OnlineServices' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
 
-        await webCommons.launchApplication(Routes.ONLINE_SERVICE_ILLUSTRATION_UAT1);
+        await webCommons.launchApplication(Routes.ONLINE_SERVICES);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -1036,7 +1036,7 @@ test.describe('Component UI Validation', () => {
 
     test('Alert UI Testing', { tag: '@Alert' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
-        await webCommons.launchApplication(Routes.ALERT_1);
+        await webCommons.launchApplication(Routes.ALERT);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);
@@ -1094,7 +1094,7 @@ test.describe('Component UI Validation', () => {
 
     test('Tab Component Light Theme UI Testing', { tag: '@TabComponentLightTheme' }, async ({ page }) => {
         const webCommons = new WebCommons(page);
-        await webCommons.launchApplication(Routes.TAB_COMPONENT_LIGHT_THEAM);
+        await webCommons.launchApplication(Routes.TAB_COMPONENT_LIGHT_THEME);
         await webCommons.waitForPageLoad();
         await UICommons.ensurePageReadyForTesting(page);
         await UICommons.preparePageForFullPageScreenshot(page);

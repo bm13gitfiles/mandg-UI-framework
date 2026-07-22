@@ -261,8 +261,7 @@ export class Components {
     static footer(): string {
         return `
         <tr>
-            <td style="padding: 40px 40px; background:#055a60; text-align: center; color: #7dffb9; font-size: 14px; font-family: 'Infra', sans-serif;">
-                <div style="font-size: 28px; font-weight: 500; margin-bottom: 20px;">Quick links</div>
+            <td style="padding: 30px 40px; background:#055a60; text-align: center; color: #7dffb9; font-size: 12px; border-top: 1px solid ${Theme.border};">
                 This report was generated automatically by the M&G UI Automation Framework.<br>
                 Powered by Playwright Visual Regression Testing.
             </td>

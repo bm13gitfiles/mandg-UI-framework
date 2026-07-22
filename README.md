@@ -149,6 +149,15 @@ GRAPH_REFRESH_TOKEN=your_long_lived_refresh_token_here
 
 The `EmailReporter.ts` class automatically exchanges the `GRAPH_REFRESH_TOKEN` for a short-lived access token on every single test run, ensuring secure, headless authentication without any manual intervention.
 
+### 🎨 Customizing the Email Report
+
+The email reporting module is designed to be highly modular and easily customizable. All reporting logic is contained within the `commons/reporting/` directory:
+
+- **`Theme.ts`**: The central design system. Modify this file to globally update brand colours, background shades, font families (e.g., `Infra`, `Georgia`), font sizes, and table border styling.
+- **`Components.ts`**: The structural building blocks of the email. Edit this file to alter how specific sections are presented (e.g., aligning text, modifying the bespoke success quote, or adjusting the footer layout).
+- **`HtmlTemplate.ts`**: The layout orchestrator. Modify this file to change the order of components or group metrics together.
+- **`assets/`**: Replace `email-banner.png` or `bg-arrows.png` in this directory to instantly update the base64-encoded imagery used in the report header and backgrounds.
+
 ---
 
 ## 🚀 Getting Started

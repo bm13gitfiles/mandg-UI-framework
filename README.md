@@ -124,42 +124,6 @@ mandg-UI-framework/
 
 ---
 
-## 📧 Microsoft Graph API Email Reporting
-
-This framework features a fully automated reporting engine that runs during the `global-teardown.ts` phase. Upon completion of the test suite, it collects the HTML report, gathers any failure screenshots, and securely emails a comprehensive summary to the stakeholders.
-
-### 🌟 Reporting Enhancements & Features
-- **Corporate Branding**: Pixel-perfect HTML email templates styled with M&G's brand guidelines, featuring elegant typography (`Infra` & `Georgia`), custom colours (deep teal, beige), and dynamic background imagery.
-- **Embedded Assets**: Backgrounds and banners are base64-encoded on-the-fly during teardown, effectively bypassing strict corporate email client blockers that often strip external image links.
-- **Dynamic Execution Summary**: Automatically calculates and beautifully presents overall pass rates, execution duration, environment, and visual distributions of passed/failed/skipped components.
-- **Intelligent Zero-Failure Handling**: Delivers a bespoke, elegant success message when all tests pass, ensuring a polished experience for stakeholders.
-- **Cross-Platform Compatibility**: Built using robust, table-based HTML architecture to guarantee maximum cross-platform rendering consistency across Microsoft Outlook, Gmail, and mobile email clients.
-
-### Configuration (`.env`)
-
-To enable the email reporting, you must configure a `.env` file in the root directory (this file is strictly ignored by Git for security). It requires Microsoft Graph API OAuth 2.0 credentials:
-
-```properties
-# Microsoft Graph API Credentials
-GRAPH_CLIENT_ID=your_client_id_here
-GRAPH_CLIENT_SECRET=your_client_secret_here
-GRAPH_TENANT_ID=common
-GRAPH_REFRESH_TOKEN=your_long_lived_refresh_token_here
-```
-
-The `EmailReporter.ts` class automatically exchanges the `GRAPH_REFRESH_TOKEN` for a short-lived access token on every single test run, ensuring secure, headless authentication without any manual intervention.
-
-### 🎨 Customizing the Email Report
-
-The email reporting module is designed to be highly modular and easily customizable. All reporting logic is contained within the `commons/reporting/` directory:
-
-- **`Theme.ts`**: The central design system. Modify this file to globally update brand colours, background shades, font families (e.g., `Infra`, `Georgia`), font sizes, and table border styling.
-- **`Components.ts`**: The structural building blocks of the email. Edit this file to alter how specific sections are presented (e.g., aligning text, modifying the bespoke success quote, or adjusting the footer layout).
-- **`HtmlTemplate.ts`**: The layout orchestrator. Modify this file to change the order of components or group metrics together.
-- **`assets/`**: Replace `email-banner.png` or `bg-arrows.png` in this directory to instantly update the base64-encoded imagery used in the report header and backgrounds.
-
----
-
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
@@ -328,3 +292,41 @@ This repository is fully integrated with Azure DevOps pipelines via the `azure-p
 The pipeline automatically publishes the following artifacts when the run completes:
 - **`playwright-html-report`**: The full HTML suite report. Download and open `index.html` to view it.
 - **`failure-screenshots`**: Captures of visual mismatches or page errors (only generated if a test fails).
+
+---
+
+## 📧 Microsoft Graph API Email Reporting
+
+This framework features a fully automated reporting engine that runs during the `global-teardown.ts` phase. Upon completion of the test suite, it collects the HTML report, gathers any failure screenshots, and securely emails a comprehensive summary to the stakeholders.
+
+### 🌟 Reporting Enhancements & Features
+- **Corporate Branding**: Pixel-perfect HTML email templates styled with M&G's brand guidelines, featuring elegant typography (`Infra` & `Georgia`), custom colours (deep teal, beige), and dynamic background imagery.
+- **Embedded Assets**: Backgrounds and banners are base64-encoded on-the-fly during teardown, effectively bypassing strict corporate email client blockers that often strip external image links.
+- **Dynamic Execution Summary**: Automatically calculates and beautifully presents overall pass rates, execution duration, environment, and visual distributions of passed/failed/skipped components.
+- **Intelligent Zero-Failure Handling**: Delivers a bespoke, elegant success message when all tests pass, ensuring a polished experience for stakeholders.
+- **Cross-Platform Compatibility**: Built using robust, table-based HTML architecture to guarantee maximum cross-platform rendering consistency across Microsoft Outlook, Gmail, and mobile email clients.
+
+### Configuration (`.env`)
+
+To enable the email reporting, you must configure a `.env` file in the root directory (this file is strictly ignored by Git for security). It requires Microsoft Graph API OAuth 2.0 credentials:
+
+```properties
+# Microsoft Graph API Credentials
+GRAPH_CLIENT_ID=your_client_id_here
+GRAPH_CLIENT_SECRET=your_client_secret_here
+GRAPH_TENANT_ID=common
+GRAPH_REFRESH_TOKEN=your_long_lived_refresh_token_here
+```
+
+The `EmailReporter.ts` class automatically exchanges the `GRAPH_REFRESH_TOKEN` for a short-lived access token on every single test run, ensuring secure, headless authentication without any manual intervention.
+
+### 🎨 Customizing the Email Report
+
+The email reporting module is designed to be highly modular and easily customizable. All reporting logic is contained within the `commons/reporting/` directory:
+
+- **`Theme.ts`**: The central design system. Modify this file to globally update brand colours, background shades, font families (e.g., `Infra`, `Georgia`), font sizes, and table border styling.
+- **`Components.ts`**: The structural building blocks of the email. Edit this file to alter how specific sections are presented (e.g., aligning text, modifying the bespoke success quote, or adjusting the footer layout).
+- **`HtmlTemplate.ts`**: The layout orchestrator. Modify this file to change the order of components or group metrics together.
+- **`assets/`**: Replace `email-banner.png` or `bg-arrows.png` in this directory to instantly update the base64-encoded imagery used in the report header and backgrounds.
+
+---

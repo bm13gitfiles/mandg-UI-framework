@@ -13,7 +13,7 @@ export class Components {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-        <body style="margin:0; padding:0; background:${Theme.pageBackground}; font-family:${Theme.fontFamily}; color:${Theme.textDark};">
+        <body style="margin:0; padding:0; background:${Theme.pageBackground}; font-family:${Theme.fontFamily}; color:#333333;">
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:${Theme.pageBackground};">
                 <tr>
                     <td align="center">

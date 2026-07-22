@@ -128,6 +128,13 @@ mandg-UI-framework/
 
 This framework features a fully automated reporting engine that runs during the `global-teardown.ts` phase. Upon completion of the test suite, it collects the HTML report, gathers any failure screenshots, and securely emails a comprehensive summary to the stakeholders.
 
+### 🌟 Reporting Enhancements & Features
+- **Corporate Branding**: Pixel-perfect HTML email templates styled with M&G's brand guidelines, featuring elegant typography (`Infra` & `Georgia`), custom colours (deep teal, beige), and dynamic background imagery.
+- **Embedded Assets**: Backgrounds and banners are base64-encoded on-the-fly during teardown, effectively bypassing strict corporate email client blockers that often strip external image links.
+- **Dynamic Execution Summary**: Automatically calculates and beautifully presents overall pass rates, execution duration, environment, and visual distributions of passed/failed/skipped components.
+- **Intelligent Zero-Failure Handling**: Delivers a bespoke, elegant success message when all tests pass, ensuring a polished experience for stakeholders.
+- **Cross-Platform Compatibility**: Built using robust, table-based HTML architecture to guarantee maximum cross-platform rendering consistency across Microsoft Outlook, Gmail, and mobile email clients.
+
 ### Configuration (`.env`)
 
 To enable the email reporting, you must configure a `.env` file in the root directory (this file is strictly ignored by Git for security). It requires Microsoft Graph API OAuth 2.0 credentials:

@@ -75,7 +75,7 @@ export class EmailReporter {
             const accessToken = await this.getAccessToken();
 
             // Build dynamic subject line based on test execution status
-            const statusIcon = summary.failed > 0 ? "❌" : "✅";
+            const statusIcon = summary.failed > 0 ? "[FAILED]" : "[PASSED]";
             const environment = process.env.TEST_ENV ? process.env.TEST_ENV.toUpperCase() : "STAGE";
             const emailSubject = `${statusIcon} M&G UI Report | ${environment} | ${summary.passed} Passed | ${summary.failed} Failed`;
 

@@ -2,7 +2,7 @@
   "cookies": [
     {
       "name": "affinity",
-      "value": "\"46de5a6a7ec11a16\"",
+      "value": "\"e3fd34d84d025abb\"",
       "domain": "showcase-www-stage.mandg.com",
       "path": "/",
       "expires": -1,
@@ -12,23 +12,33 @@
     },
     {
       "name": "OptanonAlertBoxClosed",
-      "value": "2026-07-17T11:13:23.058Z",
+      "value": "2026-07-22T10:11:22.889Z",
       "domain": "showcase-www-stage.mandg.com",
       "path": "/",
-      "expires": 1815822803,
+      "expires": 1816251082,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "OptanonConsent",
-      "value": "isGpcEnabled=0&datestamp=Fri+Jul+17+2026+16%3A43%3A23+GMT%2B0530+(India+Standard+Time)&version=202604.2.0&browserGpcFlag=0&isDntEnabled=0&isIABGlobal=false&hosts=&consentId=9a8e128d-da0e-403f-b2e7-bf1a80c118c7&interactionCount=1&isAnonUser=1&prevHadToken=0&landingPath=NotLandingPage&groups=C0001%3A1%2CC0004%3A1%2CC0002%3A1%2CC0003%3A1&fclco=&lastConsentTs=1784286803&intType=1",
+      "value": "isGpcEnabled=0&datestamp=Wed+Jul+22+2026+15%3A41%3A22+GMT%2B0530+(India+Standard+Time)&version=202604.2.0&browserGpcFlag=0&isDntEnabled=0&isIABGlobal=false&hosts=&consentId=536ae97f-e830-4e2e-b680-6d15913e77db&interactionCount=1&isAnonUser=1&prevHadToken=0&landingPath=NotLandingPage&groups=C0001%3A1%2CC0004%3A1%2CC0002%3A1%2CC0003%3A1&fclco=&lastConsentTs=1784715082&intType=1",
       "domain": "showcase-www-stage.mandg.com",
       "path": "/",
-      "expires": 1815822803,
+      "expires": 1816251082,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
+    },
+    {
+      "name": "demdex",
+      "value": "69878011382711757751914721652669917342",
+      "domain": ".demdex.net",
+      "path": "/",
+      "expires": 1800267083.37331,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
     }
   ],
   "origins": [

@@ -221,12 +221,14 @@ export class Components {
 
     static failures(summary: TestResultSummary): string {
         const hasFailures = summary.failedTests.length > 0;
-        const titleText = hasFailures ? "Failures Observed:" : "No failures observed<br>in this run";
+        const titleContent = hasFailures 
+            ? "Failures Observed:" 
+            : `<div style="display: inline-block; text-align: left;">&ldquo;No failures observed<br><span style="display: block; margin-left: 80px;">in this run&rdquo;</span></div>`;
         
         return `
         <tr>
             <td style="padding: 40px 40px 50px; background:${hasFailures ? Theme.risksBackground : Theme.pageBackground};">
-                <div style="font-size: ${hasFailures ? '26px' : '40px'}; font-weight: ${hasFailures ? 'bold' : 'normal'}; color: ${hasFailures ? Theme.risksText : Theme.primary}; margin-bottom: ${hasFailures ? '25px' : '0'}; font-family: 'Infra', sans-serif; ${hasFailures ? '' : 'text-align: center; line-height: 1.2;'}">${titleText}</div>
+                <div style="font-size: ${hasFailures ? '26px' : '40px'}; font-weight: ${hasFailures ? 'bold' : 'normal'}; color: ${hasFailures ? Theme.risksText : Theme.primary}; margin-bottom: ${hasFailures ? '25px' : '0'}; font-family: ${hasFailures ? "'Infra', sans-serif" : "Georgia, 'Times New Roman', serif"}; ${hasFailures ? '' : 'text-align: center; font-style: italic; line-height: 1.3;'}">${titleContent}</div>
                 ${hasFailures ? `
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                     ${summary.failedTests.map((test, index) => {

@@ -220,12 +220,14 @@ export class Components {
     }
 
     static failures(summary: TestResultSummary): string {
-        if (summary.failedTests.length === 0) return "";
-
+        const hasFailures = summary.failedTests.length > 0;
+        const titleText = hasFailures ? "Failures Observed:" : "No failures observed in this run";
+        
         return `
         <tr>
-            <td style="padding: 40px 40px 50px; background:${Theme.risksBackground};">
-                <div style="font-size: 26px; font-weight: bold; color: ${Theme.risksText}; margin-bottom: 25px; font-family: ${Theme.fontFamily};">Failures Observed:</div>
+            <td style="padding: 40px 40px 50px; background:${hasFailures ? Theme.risksBackground : Theme.white};">
+                <div style="font-size: 26px; font-weight: bold; color: ${hasFailures ? Theme.risksText : Theme.primary}; margin-bottom: 25px; font-family: ${Theme.fontFamily};">${titleText}</div>
+                ${hasFailures ? `
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                     ${summary.failedTests.map((test, index) => {
                         const cleanMsg = test.failureMessage.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, "");
@@ -248,6 +250,7 @@ export class Components {
                         `;
                     }).join("")}
                 </table>
+                ` : ""}
             </td>
         </tr>
         `;

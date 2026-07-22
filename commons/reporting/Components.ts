@@ -223,12 +223,12 @@ export class Components {
         const hasFailures = summary.failedTests.length > 0;
         const titleContent = hasFailures 
             ? "Failures Observed:" 
-            : `<div style="display: inline-block; text-align: left;">"No failures observed<br><span style="display: block; margin-left: 120px;">in this run"</span></div>`;
+            : `<div style="display: inline-block; text-align: left;">&ldquo;No failures observed<br><span style="display: block; margin-left: 120px;">in this run&rdquo;</span></div>`;
         
         return `
         <tr>
             <td style="padding: 40px 40px 50px; background:${hasFailures ? Theme.risksBackground : '#E3F5B8'};">
-                <div style="font-size: ${hasFailures ? '26px' : '40px'}; font-weight: ${hasFailures ? 'bold' : 'normal'}; color: ${hasFailures ? Theme.risksText : Theme.primary}; margin-bottom: ${hasFailures ? '25px' : '0'}; font-family: ${hasFailures ? Theme.fontFamily : "'Infra', sans-serif"}; ${hasFailures ? '' : 'text-align: center; line-height: 1.3;'}">${titleContent}</div>
+                <div style="font-size: ${hasFailures ? '26px' : '40px'}; font-weight: ${hasFailures ? 'bold' : 'normal'}; color: ${hasFailures ? Theme.risksText : Theme.primary}; margin-bottom: ${hasFailures ? '25px' : '0'}; font-family: ${hasFailures ? Theme.fontFamily : "Georgia, 'Times New Roman', serif"}; ${hasFailures ? '' : 'text-align: center; font-style: italic; line-height: 1.3;'}">${titleContent}</div>
                 ${hasFailures ? `
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                     ${summary.failedTests.map((test, index) => {
@@ -261,7 +261,8 @@ export class Components {
     static footer(): string {
         return `
         <tr>
-            <td style="padding: 30px 40px; background:${Theme.white}; text-align: center; color: ${Theme.textSecondary}; font-size: 12px; border-top: 1px solid ${Theme.border};">
+            <td style="padding: 40px 40px; background:#055a60; text-align: center; color: #7dffb9; font-size: 14px; font-family: 'Infra', sans-serif;">
+                <div style="font-size: 28px; font-weight: 500; margin-bottom: 20px;">Quick links</div>
                 This report was generated automatically by the M&G UI Automation Framework.<br>
                 Powered by Playwright Visual Regression Testing.
             </td>

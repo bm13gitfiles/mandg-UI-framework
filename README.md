@@ -175,6 +175,12 @@ We have exposed several simple NPM commands to make running your tests incredibl
 
 ## 🧠 Core Concepts
 
+### Centralized URL Management (`Routes.ts`)
+
+To maintain clean, strongly-typed test files and avoid hardcoded strings, all URLs and endpoints are centralized within a constant dictionary located at `commons/constants/Routes.ts`. 
+
+Whenever a new component test is added to `component-ui.spec.ts`, the developer simply adds an `UPPER_SNAKE_CASE` property to the `Routes` object and references it using `Routes.YOUR_NEW_KEY`. This provides instant IDE autocomplete and eliminates typo-related test failures.
+
 ### Global Setup
 
 Instead of having every single test navigate to the application and manually accept the OneTrust Cookie Banner (which wastes time), the framework uses a `global-setup.ts` file. Playwright runs this file **once** before the test suite begins. It accepts the cookies and saves the browser session into `storageState.json`. Every subsequent test launches with those cookies already injected.
